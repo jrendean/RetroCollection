@@ -8,69 +8,96 @@
 import SwiftUI
 
 struct DetailView: View {
+    
+    @Binding var retroCollectionItems: [RetroCollectionItem]
     @Binding var retroCollectionItem: RetroCollectionItem
     
     @State private var showEditView: Bool = false
     @State private var retroCollectionItemForEditing = RetroCollectionItem()
         
     @State private var driveEditorConfig: EditorConfig = EditorConfig<Drive>()
+    @State private var expansionEditorConfig: EditorConfig = EditorConfig<ExpansionCard>()
+    @State private var connectionEditorConfig: EditorConfig = EditorConfig<Connection>()
     
     var body: some View {
         
         List {
-            HStack {
-                Text("Manufacturer:")
-                Spacer()
-                Text(retroCollectionItem.manufacturer)
-            }
-            HStack {
-                Text("Model:")
-                Spacer()
-                Text(retroCollectionItem.name)
-            }
-            HStack {
-                Text("Processor")
-                Spacer()
-                Text(retroCollectionItem.processorInfo)
-            }
-            HStack {
-                Text("Total RAM")
-                Spacer()
-                Text(retroCollectionItem.totalRam)
-            }
-      
-            DisclosureGroup("Details") {
+            
+            Section("General") {
                 
                 HStack {
-                    Text("Model:")
+                    Text("Type:")
                     Spacer()
-                    Text(retroCollectionItem.model)
-                }
-                HStack {
-                    Text("Model Number:")
-                    Spacer()
-                    Text(retroCollectionItem.modelNumber)
-                }
-                HStack {
-                    Text("CodeName:")
-                    Spacer()
-                    Text(retroCollectionItem.codeName ?? "")
-                }
-                HStack {
-                    Text("Also Known As:")
-                    Spacer()
-                    Text(retroCollectionItem.alsoKnownAs ?? "")
+                    Text(retroCollectionItem.type)
                 }
                 
                 HStack {
-                    Text("Released:")
+                    Text("Manufacturer:")
                     Spacer()
-                    Text(retroCollectionItem.releasedDateFormatted)
+                    Text(retroCollectionItem.manufacturer)
                 }
+                
                 HStack {
-                    Text("Discontinued:")
+                    Text("Name:")
                     Spacer()
-                    Text(retroCollectionItem.discontinuedDateFormatted)
+                    Text(retroCollectionItem.name)
+                }
+                
+                HStack {
+                    Text("Processor")
+                    Spacer()
+                    Text(retroCollectionItem.processorInfo)
+                }
+                
+                HStack {
+                    Text("Total RAM")
+                    Spacer()
+                    Text(retroCollectionItem.totalRam)
+                }
+          
+                DisclosureGroup("Details") {
+                    
+                    HStack {
+                        Text("Model:")
+                        Spacer()
+                        Text(retroCollectionItem.model)
+                    }
+                    
+                    HStack {
+                        Text("Model Number:")
+                        Spacer()
+                        Text(retroCollectionItem.modelNumber)
+                    }
+                    
+                    HStack {
+                        Text("Serial Number:")
+                        Spacer()
+                        Text(retroCollectionItem.serialNumber)
+                    }
+                    
+                    HStack {
+                        Text("CodeName:")
+                        Spacer()
+                        Text(retroCollectionItem.codeName)
+                    }
+                    
+                    HStack {
+                        Text("Also Known As:")
+                        Spacer()
+                        Text(retroCollectionItem.alsoKnownAs)
+                    }
+                    
+                    HStack {
+                        Text("Released:")
+                        Spacer()
+                        Text(retroCollectionItem.releasedDateFormatted)
+                    }
+                    
+                    HStack {
+                        Text("Discontinued:")
+                        Spacer()
+                        Text(retroCollectionItem.discontinuedDateFormatted)
+                    }
                 }
             }
             
@@ -95,24 +122,99 @@ struct DetailView: View {
                 )
             }
             
-            Section("Expansions") {
-                ForEach (retroCollectionItem.expansions) { expansion in
-                    Text(expansion.type.rawValue)
+            Section("Expansion") {
+                ForEach ($retroCollectionItem.expansions) { $expansion in
+                    HStack {
+                        Text(expansion.type.rawValue)
+                        Spacer()
+                        Image(systemName: "info.circle")
+                            .symbolRenderingMode(.multicolor)
+                            .onTapGesture {
+                                expansionEditorConfig.present(mode: .view, data: expansion)
+                            }
+                    }
+                }
+                .sheet(
+                    isPresented: $expansionEditorConfig.shouldShowView,
+                    content: {
+                        ExpansionItemControl(editorConfig: $expansionEditorConfig)
+                    }
+                )
+            }
+            
+            Section("Connections") {
+                ForEach ($retroCollectionItem.connections) { $connection in
+                    HStack {
+                        Text(connection.type.rawValue)
+                        Spacer()
+                        Image(systemName: "info.circle")
+                            .symbolRenderingMode(.multicolor)
+                            .onTapGesture {
+                                connectionEditorConfig.present(mode: .view, data: connection)
+                            }
+                    }
+                }
+                .sheet(
+                    isPresented: $connectionEditorConfig.shouldShowView,
+                    content: {
+                        ConnectionItemControl(editorConfig: $connectionEditorConfig)
+                    }
+                )
+            }
+            
+            
+            Section("Operating System(s)") {
+                ForEach ($retroCollectionItem.operatingSystems) { $operatingSystem in
+                    HStack {
+                        Text("\(operatingSystem.name) \(operatingSystem.version)")
+                        Spacer()
+                        if (operatingSystem.links.count > 0) {
+                            Link(destination: URL(string: operatingSystem.links[0])!) {
+                                Image(systemName: "info.circle")
+                                    .symbolRenderingMode(.multicolor)
+                            }
+                        }
+                    }
                 }
             }
             
-            Section("Connectors") {
-                ForEach (retroCollectionItem.connections) { connection in
-                    Text(connection.type.rawValue)
+            
+            Section("Links") {                
+                ForEach($retroCollectionItem.links, id: \.self) { $link in
+                    HStack {
+                        Text(.init("[\(link)](\(link))"))
+                            .lineLimit(1)
+                            .padding(2)
+                        Spacer()
+                    }
                 }
             }
             
-            OperatingSystemView(operatingSystems: $retroCollectionItem.operatingSystems)
             
-            MaintenanceView(retroCollectionItem: retroCollectionItem)
+            Section("Maintenance") {
+                HStack {
+                    Text("Recapped:")
+                    Spacer()
+                    Text(retroCollectionItem.maintenance.recapped ? "Yes" : "No")
+                }
+                HStack {
+                    Text("Battery State:")
+                    Spacer()
+                    Text(retroCollectionItem.maintenance.batteryState)
+                }
+                HStack {
+                    Text("Known Issues:")
+                    Spacer()
+                    Text(retroCollectionItem.maintenance.knownIssues)
+                }
+                HStack() {
+                    Text("Note:")
+                    Spacer()
+                    Text(retroCollectionItem.maintenance.notes)
+                }
+            }
             
         }
-        .navigationTitle("\(retroCollectionItem.manufacturer) \(retroCollectionItem.name)")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(
@@ -123,128 +225,54 @@ struct DetailView: View {
                     label: { Text("Edit") })
             })
         }
-        .fullScreenCover(isPresented: $showEditView, content: {
-            NavigationView {
-                EditView(retroCollectionItem: $retroCollectionItemForEditing)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction, content: {
-                            Button(
-                                action: { showEditView = false },
-                                label: { Text("Cancel") }
-                            )
-                        })
-                        
-                        ToolbarItem(placement: .confirmationAction, content: {
-                            Button(
-                                action: {
-                                    showEditView = false
-                                    self.retroCollectionItem = retroCollectionItemForEditing
-                                },
-                                label: { Text("Save") }
-                            )
-                        })
-                    }
-                    
-            }
-        })
-        
-
-    }
-}
-
-struct DriveDetailsView: View {
-    @Binding var show: Bool
-    @Binding var drive: Drive
-    
-    var body: some View {
-        List {
-            HStack{
-                Text("Manufacturer")
-                Spacer()
-                Text(drive.manufacturer)
-            }
-            
-            HStack{
-                Text("Model")
-                Spacer()
-                Text(drive.model)
-            }
-            
-            HStack{
-                Text("Size")
-                Spacer()
-                Text(drive.formattedSize)
-            }
-            
-            HStack{
-                Text("Working")
-                Spacer()
-                Text(drive.isWorking ? "Yes" : "No")
-            }
-        }
-        
-        Button("Close") { show = false }
-    }
-}
-
-struct OperatingSystemView: View {
-    @Binding var operatingSystems: [OperatingSystem]
-    
-    @State private var pop = false
-    
-    var body: some View {
-        Section("Operating System(s)") {
-        //DisclosureGroup("Maintenance") {
-            ForEach (operatingSystems) { operatingSystem in
-                HStack {
-                    Text("\(operatingSystem.name) \(operatingSystem.version)")
-                    Spacer()
-                    if let url = operatingSystem.links?[0] {
-                        Link("Link", destination: URL(string: url)!)
-                    }
+        .fullScreenCover(
+            isPresented: $showEditView,
+            content: {
+                NavigationView {
+                    EditView(retroCollectionItem: $retroCollectionItemForEditing)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction, content: {
+                                Button(
+                                    action: { showEditView = false },
+                                    label: { Text("Cancel") }
+                                )
+                            })
+                            
+                            ToolbarItem(placement: .confirmationAction, content: {
+                                Button(
+                                    action: {
+                                        showEditView = false
+                                        
+                                        self.retroCollectionItem = retroCollectionItemForEditing
+                                        
+                                        // HACK with passing in the binding for all the whole collection and just this item, fix me
+                                        // perhaps do no use a navigationlink in the main view and do a sheet or ontap thing that has
+                                        // ondismiss or use editorconfig and pass that in
+                                        // or anoter datamanager.save() that takes the single item, finds it, updates it
+                                        // then calls the regular save
+                                        DataManager.save(retroCollectionItems: self.retroCollectionItems)
+                                    },
+                                    label: { Text("Save") }
+                                )
+                            })
+                        }                        
                 }
-            }
-        }
+            })
+        .navigationTitle("\(retroCollectionItem.manufacturer) \(retroCollectionItem.name)")
+        
     }
 }
 
-struct MaintenanceView: View {
-    var retroCollectionItem: RetroCollectionItem
-    
-    var body: some View {
-        Section("Maintenance") {
-        //DisclosureGroup("Maintenance")  {
-            HStack {
-                Text("Recapped:")
-                Spacer()
-                //Toggle("adsf", isOn: //retroCollectionItem.maintenance?.recapped ?? false)
-            }
-            HStack {
-                Text("Battery State:")
-                Spacer()
-                Text(retroCollectionItem.maintenance?.batteryState ?? "")
-            }
-            HStack {
-                Text("Known Issues:")
-                Spacer()
-                Text(retroCollectionItem.maintenance?.knownIssues ?? "")
-            }
-            HStack() {
-                Text("Note:").alignmentGuide(VerticalAlignment.top) { _ in 0 }
-                //Spacer()
-                Text(retroCollectionItem.maintenance?.notes ?? "")
-            }
-        }
-    }
-}
 
 #if DEBUG
 struct DetailView_Previews: PreviewProvider {
     struct StatefulPreviewWrapper: View {
-        @State private var testData = RetroCollectionItem.testData[1]
+        
+        @State private var testData1 = RetroCollectionItem.testData
+        @State private var testData2 = RetroCollectionItem.testData[0]
         
         var body: some View {
-            DetailView(retroCollectionItem: $testData)
+            DetailView(retroCollectionItems: $testData1, retroCollectionItem: $testData2)
         }
     }
     

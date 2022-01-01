@@ -15,17 +15,17 @@ extension RetroCollectionItem {
         
         return [
             RetroCollectionItem(
+                type: "Laptop",
                 manufacturer: "Apple",
                 name: "PowerBook FireWire",
-                modelNumber: "M7573",
-                type: "Laptop",
-                productFamily: "PowerBook",
                 model: "PowerBook 3,1",
+                modelNumber: "M7573",
+                productFamily: "PowerBook",
                 codeName: "Pismo",
                 serialNumber: "QT03694NK34",
                 //orderNumber: "M7711LL/A",
-                releasedDate: dateFormatter.date(from: "2000-2-16"),
-                discontinuedDate: dateFormatter.date(from: "2001-1-9"),
+                releasedDate: dateFormatter.date(from: "2000-2-16")!,
+                discontinuedDate: dateFormatter.date(from: "2001-1-9")!,
                 
                 cpu: CPU(
                     manufacturer: "",
@@ -48,13 +48,13 @@ extension RetroCollectionItem {
                 
                 operatingSystems: [
                     OperatingSystem(
-                        name: "OS X Tiger",
                         manufacturer: "Apple",
+                        name: "OS X Tiger",
                         version: "10.4.11",
                         links: ["https://en.wikipedia.org/wiki/Mac_OS_X_Tiger"]),
                     OperatingSystem(
-                        name: "MacOS",
                         manufacturer: "Apple",
+                        name: "MacOS",
                         version: "9.2.2",
                         links: ["https://en.wikipedia.org/wiki/Mac_OS_9"])
                 ],
@@ -97,9 +97,9 @@ extension RetroCollectionItem {
             ),
             
             RetroCollectionItem(
+                type: "Desktop",
                 manufacturer: "Packard Bell",
                 name: "Pack-Mate 4100CD",
-                type: "Desktop",
                 
                 cpu: CPU(manufacturer: "Intel", name: "Pentium", model: "Pentium", family: "Pentium", speed: 75, speedType: .mhz, bits: 32),
                 
@@ -111,7 +111,7 @@ extension RetroCollectionItem {
                 ],
                 
                 operatingSystems: [
-                    OperatingSystem(name: "Windows", manufacturer: "Microsoft", version: "98")
+                    OperatingSystem(manufacturer: "Microsoft", name: "Windows", version: "98")
                 ],
                 
                 drives: [

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExpansionCard: Codable, Identifiable {
+struct ExpansionCard: Codable, Identifiable, Initable {
     var id = UUID()
     
     var manufacturer: String = ""
@@ -17,10 +17,10 @@ struct ExpansionCard: Codable, Identifiable {
     var type: ExpansionCardTypes = .unknown
     var interface: ExpansionCardInterfaces = .unknown
     
-    var driverLinks: [String]?
+    var driverLinks: [String] = []
 }
 
-enum ExpansionCardTypes: String, Codable {
+enum ExpansionCardTypes: String, Codable, CaseIterable, Identifiable {
     case unknown = "Unknown"
     case video = "Video"
     case ethernet = "Ethernet"
@@ -30,6 +30,9 @@ enum ExpansionCardTypes: String, Codable {
     case scsi = "SCSI"
     case multi = "Multipurpose"
         
+    var id: Self { self }
+    var displayName: String { rawValue }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let status = try? container.decode(String.self)
@@ -47,7 +50,7 @@ enum ExpansionCardTypes: String, Codable {
     }
 }
 
-enum ExpansionCardInterfaces: String, Codable {
+enum ExpansionCardInterfaces: String, Codable, CaseIterable, Identifiable {
     case unknown = "Unknown"
     case isa8 = "ISA (8)"
     case isa16 = "ISA (16)"
@@ -56,6 +59,9 @@ enum ExpansionCardInterfaces: String, Codable {
     case pcie = "PCIE"
     case pcmcia = "PCMCIA"
     case agp = "AGP"
+    
+    var id: Self { self }
+    var displayName: String { rawValue }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

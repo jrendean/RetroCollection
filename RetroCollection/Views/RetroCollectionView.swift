@@ -23,19 +23,24 @@ struct RetroCollectionView: View {
     var body: some View {
 
         NavigationView {
+            
             GeometryReader { geometry in
+                
                 ZStack(alignment: .leading) {
                     
                     MainView(retroCollectionItems: self.$retroCollectionItems, searchText: searchText)
 
-                    if self.showMenu {
+                    /*
+                     if self.showMenu {
                         MenuView()
                             .frame(width: geometry.size.width / 2)
                             .transition(.move(edge: .leading))
                     }
+                    */
 
                 }
-                .gesture(DragGesture()
+                /*
+                 .gesture(DragGesture()
                     .onEnded {
                         if $0.translation.width < -100 {
                             withAnimation {
@@ -44,6 +49,7 @@ struct RetroCollectionView: View {
                         }
                     }
                 )
+                */
             }
             .searchable(text: $searchText)
             .navigationTitle("Retro Collection").navigationBarTitleDisplayMode(.inline)
@@ -61,7 +67,22 @@ struct RetroCollectionView: View {
                 })
                 */
                 
-                ToolbarItem(placement: .navigationBarTrailing, content: { EditButton() })
+                #if DEBUG
+                ToolbarItem(
+                    placement: .navigationBarLeading,
+                    content: {
+                        Button(
+                            action: {
+                                DataManager.save(retroCollectionItems: RetroCollectionItem.testData)
+                            },
+                            label: {
+                                Text("T")
+                            }
+                        )
+                    })
+                #endif
+                
+                //ToolbarItem(placement: .navigationBarTrailing, content: { EditButton() })
                 
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                     Button(
@@ -70,12 +91,6 @@ struct RetroCollectionView: View {
                         },
                         label: {
                             Image(systemName: "plus")
-                            /*
-                             NavigationLink(
-                                destination: AddView(),
-                                label: { Image(systemName: "plus") }
-                            )
-                            */
                         }
                     )
                     .disabled(self.showMenu ? true : false)
@@ -105,12 +120,14 @@ struct RetroCollectionView: View {
                                             self.retroCollectionItems.append(newRetroCollectionItem)
                                             
                                             newRetroCollectionItem = RetroCollectionItem()
+                                            
+                                            DataManager.save(retroCollectionItems: self.retroCollectionItems)
                                         },
                                         label: { Text("Save") }
                                     )
                                 })
                             }
-                        }
+                    }
                 })
         }
     }
@@ -133,7 +150,8 @@ struct MainView: View {
                 let retroCollectionItemBinding = $retroCollectionItems[index]
                 
                 NavigationLink(
-                    destination: DetailView(retroCollectionItem: retroCollectionItemBinding)) {
+                    destination: DetailView(retroCollectionItems: $retroCollectionItems, retroCollectionItem: retroCollectionItemBinding)) {
+                        
                         RetroCollectionItemRow(retroCollectionItem: retroCollectionItem)
                     }
             }
@@ -144,6 +162,8 @@ struct MainView: View {
     
     func onDelete(offsets: IndexSet) {
         retroCollectionItems.remove(atOffsets: offsets)
+        
+        DataManager.save(retroCollectionItems: RetroCollectionItem.testData)
     }
     
     func onMove(source: IndexSet, destination: Int){
@@ -197,14 +217,10 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
          
         Group {
-            NavigationView {
-                StatefulPreviewWrapper()
-            }
-            
-            NavigationView {
-                StatefulPreviewWrapper()
-                    .preferredColorScheme(.dark)
-            }
+            StatefulPreviewWrapper()
+        
+            StatefulPreviewWrapper()
+                .preferredColorScheme(.dark)
         }
     }
 }

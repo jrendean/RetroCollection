@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Connection: Codable, Identifiable {
+struct Connection: Codable, Identifiable, Initable {
     var id = UUID()
     
-    var type: ConnectionTypes
+    var type: ConnectionTypes = .unknown
     var count: Int = 1
-    var format: String?
+    var format: String = ""
 }
 
-enum ConnectionTypes: String, Codable {
+enum ConnectionTypes: String, Codable, CaseIterable, Identifiable {
     case unknown = "Unknown"
     case keyboard = "Keyboard"
     case serial = "Serial"
@@ -40,6 +40,9 @@ enum ConnectionTypes: String, Codable {
     case thunderbolt = "Thunderbolt"
     case usb = "USB"
     case scsi = "SCSI"
+    
+    var id: Self { self }
+    var displayName: String { rawValue }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

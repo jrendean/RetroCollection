@@ -11,7 +11,8 @@ import Foundation
 
 
 struct DataManager {
-    func load(completion: @escaping ([RetroCollectionItem]) -> Void) {
+    
+    static func load(completion: @escaping ([RetroCollectionItem]) -> Void) {
         DispatchQueue.global(qos: .background).async {
             
             // Copy the projects.json file to the user's documents folder if it's not already there
@@ -38,7 +39,10 @@ struct DataManager {
             
             // Attempt to decode the JSON document into an array of RenovationProject instances
             guard let retroCollections = try? decoder.decode([RetroCollectionItem].self, from: data) else {
-                fatalError("Can't decode saved renovation project data.")
+                #if DEBUG
+                try! FileManager.default.removeItem(at: fileURL)
+                #endif
+                fatalError("Can't decode saved collection project data.")
             }
             
             // Pass the array of RenovationProject instances back to the caller through the completion handler that is passed in
@@ -48,7 +52,7 @@ struct DataManager {
         }
     }
     
-    func save(retroCollectionItems: [RetroCollectionItem]) {
+    static func save(retroCollectionItems: [RetroCollectionItem]) {
         DispatchQueue.global(qos: .background).async {
             // Prepare a JSONEncoder, ensuring that it can successfully re-encode dates from the Swift Date type into text within the resulting JSON representation
             let encoder = JSONEncoder()
@@ -56,7 +60,7 @@ struct DataManager {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             
             encoder.dateEncodingStrategy = .formatted(dateFormatter)
-            encoder.outputFormatting = .prettyPrinted
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             
             // Attempt to encode the array of RenovationProject instances into a JSON document
             guard let renovationProjectsData = try? encoder.encode(retroCollectionItems) else { fatalError("Error encoding data") }
@@ -70,7 +74,6 @@ struct DataManager {
         }
     }
     
-    // MARK: Helper functions
     private static var documentsFolder: URL {
         do {
             return try FileManager.default.url(for: .documentDirectory,

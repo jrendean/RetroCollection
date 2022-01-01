@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B063CE9277E64C4005B0A1B /* RAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CE8277E64C4005B0A1B /* RAM.swift */; };
+		2B063CEB277E6525005B0A1B /* SizeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CEA277E6525005B0A1B /* SizeTypes.swift */; };
+		2B063CED277E6548005B0A1B /* SpeedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CEC277E6548005B0A1B /* SpeedTypes.swift */; };
+		2B063CEF277E89E2005B0A1B /* OperatingSystemItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */; };
 		2B14D4D4277CD25B0076A8A4 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B14D4D3277CD25B0076A8A4 /* AddView.swift */; };
 		2B21B84B277AE02600FEE58F /* collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B21B84A277ADFEB00FEE58F /* collection.json */; };
 		2B2FB0B9277C228D00D1EA51 /* DrivesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2FB0B8277C228D00D1EA51 /* DrivesViewModel.swift */; };
 		2B2FB0BB277C229600D1EA51 /* RetroCollectionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2FB0BA277C229600D1EA51 /* RetroCollectionItemViewModel.swift */; };
+		2B4A1B27277E1A770098E1EA /* ConnectionItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */; };
+		2B4A1B29277E1A860098E1EA /* ExpansionItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */; };
+		2B5D1354277D6F0D00DBC03E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D1353277D6F0D00DBC03E /* Helpers.swift */; };
+		2B5D1356277D708A00DBC03E /* EditorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D1355277D708A00DBC03E /* EditorConfig.swift */; };
 		2B5EB211277D192D00DFE426 /* FloatingMenuControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5EB210277D192D00DFE426 /* FloatingMenuControl.swift */; };
 		2B5EB213277D1A3B00DFE426 /* DriveItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5EB212277D1A3B00DFE426 /* DriveItemControl.swift */; };
 		2B7DA8692779108100F4FA09 /* RetroCollectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA8682779108100F4FA09 /* RetroCollectionApp.swift */; };
@@ -29,10 +37,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B063CE8277E64C4005B0A1B /* RAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAM.swift; sourceTree = "<group>"; };
+		2B063CEA277E6525005B0A1B /* SizeTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTypes.swift; sourceTree = "<group>"; };
+		2B063CEC277E6548005B0A1B /* SpeedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTypes.swift; sourceTree = "<group>"; };
+		2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingSystemItemControl.swift; sourceTree = "<group>"; };
 		2B14D4D3277CD25B0076A8A4 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		2B21B84A277ADFEB00FEE58F /* collection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = collection.json; sourceTree = "<group>"; };
 		2B2FB0B8277C228D00D1EA51 /* DrivesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivesViewModel.swift; sourceTree = "<group>"; };
 		2B2FB0BA277C229600D1EA51 /* RetroCollectionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroCollectionItemViewModel.swift; sourceTree = "<group>"; };
+		2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemControl.swift; sourceTree = "<group>"; };
+		2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionItemControl.swift; sourceTree = "<group>"; };
+		2B5D1353277D6F0D00DBC03E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		2B5D1355277D708A00DBC03E /* EditorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorConfig.swift; sourceTree = "<group>"; };
 		2B5EB210277D192D00DFE426 /* FloatingMenuControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMenuControl.swift; sourceTree = "<group>"; };
 		2B5EB212277D1A3B00DFE426 /* DriveItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveItemControl.swift; sourceTree = "<group>"; };
 		2B7DA8652779108100F4FA09 /* RetroCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +65,7 @@
 		2B7DA883277A608B00F4FA09 /* Drives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drives.swift; sourceTree = "<group>"; };
 		2B7DA885277A630800F4FA09 /* ExpansionCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionCards.swift; sourceTree = "<group>"; };
 		2B7DA887277A659500F4FA09 /* Connections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connections.swift; sourceTree = "<group>"; };
+		2BA32F70277FBC2C00AE025D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +101,12 @@
 		2B2FB0BD277C247B00D1EA51 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				2B5EB212277D1A3B00DFE426 /* DriveItemControl.swift */,
-				2B5EB210277D192D00DFE426 /* FloatingMenuControl.swift */,
 				2B7DA881277934F200F4FA09 /* RetroCollectionItemRow.swift */,
+				2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */,
+				2B5EB212277D1A3B00DFE426 /* DriveItemControl.swift */,
+				2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */,
+				2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */,
+				2B5EB210277D192D00DFE426 /* FloatingMenuControl.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -105,6 +125,8 @@
 		2B5D1352277D53C600DBC03E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2B5D1353277D6F0D00DBC03E /* Helpers.swift */,
+				2B5D1355277D708A00DBC03E /* EditorConfig.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -128,6 +150,7 @@
 		2B7DA8672779108100F4FA09 /* RetroCollection */ = {
 			isa = PBXGroup;
 			children = (
+				2BA32F70277FBC2C00AE025D /* Info.plist */,
 				2B7DA8682779108100F4FA09 /* RetroCollectionApp.swift */,
 				2B2FB0BE277C248300D1EA51 /* Views */,
 				2B2FB0BD277C247B00D1EA51 /* Controls */,
@@ -156,6 +179,9 @@
 				2B7DA887277A659500F4FA09 /* Connections.swift */,
 				2B7DA883277A608B00F4FA09 /* Drives.swift */,
 				2B7DA885277A630800F4FA09 /* ExpansionCards.swift */,
+				2B063CE8277E64C4005B0A1B /* RAM.swift */,
+				2B063CEA277E6525005B0A1B /* SizeTypes.swift */,
+				2B063CEC277E6548005B0A1B /* SpeedTypes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,21 +257,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B063CE9277E64C4005B0A1B /* RAM.swift in Sources */,
 				2B14D4D4277CD25B0076A8A4 /* AddView.swift in Sources */,
 				2B2FB0B9277C228D00D1EA51 /* DrivesViewModel.swift in Sources */,
+				2B4A1B29277E1A860098E1EA /* ExpansionItemControl.swift in Sources */,
 				2B7DA87A2779114500F4FA09 /* RetroCollectionItem.swift in Sources */,
 				2B7DA87E2779341000F4FA09 /* DetailView.swift in Sources */,
 				2B7DA86B2779108100F4FA09 /* RetroCollectionView.swift in Sources */,
 				2B7DA878277910EF00F4FA09 /* DataManager.swift in Sources */,
+				2B063CEB277E6525005B0A1B /* SizeTypes.swift in Sources */,
 				2B5EB211277D192D00DFE426 /* FloatingMenuControl.swift in Sources */,
+				2B063CED277E6548005B0A1B /* SpeedTypes.swift in Sources */,
 				2B7DA888277A659500F4FA09 /* Connections.swift in Sources */,
 				2B7DA8802779341D00F4FA09 /* EditView.swift in Sources */,
 				2B5EB213277D1A3B00DFE426 /* DriveItemControl.swift in Sources */,
+				2B5D1354277D6F0D00DBC03E /* Helpers.swift in Sources */,
 				2B7DA882277934F200F4FA09 /* RetroCollectionItemRow.swift in Sources */,
 				2B7DA884277A608B00F4FA09 /* Drives.swift in Sources */,
 				2B2FB0BB277C229600D1EA51 /* RetroCollectionItemViewModel.swift in Sources */,
+				2B063CEF277E89E2005B0A1B /* OperatingSystemItemControl.swift in Sources */,
 				2B7DA8692779108100F4FA09 /* RetroCollectionApp.swift in Sources */,
 				2B7DA87C27791E4E00F4FA09 /* RetroCollectionTestData.swift in Sources */,
+				2B4A1B27277E1A770098E1EA /* ConnectionItemControl.swift in Sources */,
+				2B5D1356277D708A00DBC03E /* EditorConfig.swift in Sources */,
 				2B7DA886277A630800F4FA09 /* ExpansionCards.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +414,8 @@
 				DEVELOPMENT_TEAM = F8Z3SSRKW7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RetroCollection/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Retro Collection";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -410,6 +446,8 @@
 				DEVELOPMENT_TEAM = F8Z3SSRKW7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RetroCollection/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Retro Collection";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

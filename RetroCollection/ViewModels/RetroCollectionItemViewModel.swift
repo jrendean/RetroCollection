@@ -10,31 +10,35 @@ import Foundation
 extension RetroCollectionItem {
     
     var releasedDateFormatted: String {
-        if let date = releasedDate {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-              
-            return formatter.string(from: date)
-        } else {
+        if (releasedDate == Date.distantPast) {
             return ""
         }
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+          
+        return formatter.string(from: releasedDate)
     }
     
     var discontinuedDateFormatted: String {
-        if let date = discontinuedDate {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-              
-            return formatter.string(from: date)
-        } else {
+        if (discontinuedDate == Date.distantFuture) {
             return ""
         }
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+          
+        return formatter.string(from: discontinuedDate)
     }
     
     var totalRam: String {
         var totalRam = 0
         var sizeData: String = SizeTypes.unknown.rawValue
         
+        // TODO: issues
+        // 512mb + 512mb = 1024mb -> 1gb?
+        // 512mb + 1gb = 513gb
+        // 1gb + 512mb = 512mb
         for r in ram {
             totalRam += r.size
             sizeData = r.sizeType.rawValue
@@ -44,9 +48,6 @@ extension RetroCollectionItem {
     }
     
     var processorInfo: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 2
-        return "\(cpu.model) \(formatter.string(from: NSNumber(value: cpu.speed)) ?? "0") \(cpu.speedType.rawValue)"
+        return "\(cpu.model) \(Helpers.DecimalHelper().string(from: NSNumber(value: cpu.speed)) ?? "0") \(cpu.speedType.displayName)"
     }
 }

@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-struct Drive: Codable, Identifiable {
+struct Drive: Codable, Identifiable, Initable {
     var id = UUID()
     
     var manufacturer: String = ""
@@ -17,14 +16,14 @@ struct Drive: Codable, Identifiable {
     var type: DriveTypes = .unknown
     var interface: DriveInterfaces = .unknown
     
-    var size: Double = 0 //?
-    var sizeType: SizeTypes = .unknown //?
+    var size: Double = 0
+    var sizeType: SizeTypes = .unknown
     
     var isWorking: Bool = true
 }
 
 
-enum DriveTypes: String, Codable, CaseIterable {
+enum DriveTypes: String, Codable, CaseIterable, Identifiable {
     case unknown = "Unknown"
     case floppy35 = "3.5\" Floppy"
     case floppy525 = "5.25\" Floppy"
@@ -37,6 +36,9 @@ enum DriveTypes: String, Codable, CaseIterable {
     case dvd = "DVD"
     case dvdrw = "DVDRW"
     case zip = "Zip"
+    
+    var id: Self { self }
+    var displayName: String { rawValue }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -59,7 +61,7 @@ enum DriveTypes: String, Codable, CaseIterable {
     }
 }
 
-enum DriveInterfaces: String, Codable, CaseIterable {
+enum DriveInterfaces: String, Codable, CaseIterable, Identifiable {
     case unknown = "Unknown"
     case floppy = "Floppy"
     case mfm = "MFM"
@@ -68,6 +70,9 @@ enum DriveInterfaces: String, Codable, CaseIterable {
     case sata = "SATA"
     case msata = "mSATA"
     case scsi = "SCSI"
+    
+    var id: Self { self }
+    var displayName: String { rawValue }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
