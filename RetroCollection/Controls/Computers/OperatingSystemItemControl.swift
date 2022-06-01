@@ -138,10 +138,10 @@ struct OperatingSystemItemControl_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             StatefulPreviewWrapper(
-                testData: EditorConfig<OperatingSystem>(data: RetroCollectionItem.testData[0].operatingSystems[0], mode: .view))
+                testData: EditorConfig<OperatingSystem>(data: ComputerCollectionItem.testData[0].operatingSystems[0], mode: .view))
 
             StatefulPreviewWrapper(
-                testData: EditorConfig<OperatingSystem>(data: RetroCollectionItem.testData[0].operatingSystems[0], mode: .edit))
+                testData: EditorConfig<OperatingSystem>(data: ComputerCollectionItem.testData[0].operatingSystems[0], mode: .edit))
         }
     }
 }

@@ -20,5 +20,6 @@ struct Helpers {
     }
     
     static var viewPaddingSize: CGFloat = 10
+    
+    
 }
-

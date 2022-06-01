@@ -1,22 +1,22 @@
 //
-//  ExpansionItemControl.swift
+//  DriveView.swift
 //  RetroCollection
 //
-//  Created by JR Endean on 12/30/21.
+//  Created by JR Endean on 12/29/21.
 //
 
 import SwiftUI
 
-struct ExpansionItemControl: View {
-    
-    @Binding var editorConfig: EditorConfig<ExpansionCard>
+struct DriveItemControl: View {
+
+    @Binding var editorConfig: EditorConfig<Drive>
+    //@State private var driveSize: String = String(editorConfig.data.size)
     
     var body: some View {
         
         NavigationView {
         
             VStack(alignment: .leading) {
-                
                 HStack {
                     Text("Manufacturer:")
                     Spacer()
@@ -24,18 +24,6 @@ struct ExpansionItemControl: View {
                         Text(editorConfig.data.manufacturer)
                     } else {
                         TextField("Manufacturer", text: $editorConfig.data.manufacturer)
-                            .multilineTextAlignment(.trailing)
-                    }
-                }
-                .padding(.all, editorConfig.mode == .view ? Helpers.viewPaddingSize : 0)
-                
-                HStack {
-                    Text("Name:")
-                    Spacer()
-                    if editorConfig.mode == .view {
-                        Text(editorConfig.data.name)
-                    } else {
-                        TextField("Name", text: $editorConfig.data.name)
                             .multilineTextAlignment(.trailing)
                     }
                 }
@@ -61,8 +49,8 @@ struct ExpansionItemControl: View {
                     } else {
                         Picker(
                             selection: $editorConfig.data.type,
-                            label: Text("Types")) {
-                                ForEach(ExpansionCardTypes.allCases, id: \.self) { type in
+                            label: Text("Type")) {
+                                ForEach(DriveTypes.allCases, id: \.self) { type in
                                     Text(type.rawValue).tag(type)
                                 }
                             }
@@ -78,8 +66,8 @@ struct ExpansionItemControl: View {
                     } else {
                         Picker(
                             selection: $editorConfig.data.interface,
-                            label: Text("Interface")) {
-                                 ForEach(ExpansionCardInterfaces.allCases, id: \.self) { interface in
+                            label: Text("Interfacessss")) {
+                                ForEach(DriveInterfaces.allCases, id: \.self) { interface in
                                     Text(interface.rawValue).tag(interface)
                                 }
                             }
@@ -87,50 +75,58 @@ struct ExpansionItemControl: View {
                 }
                 .padding(.all, editorConfig.mode == .view ? Helpers.viewPaddingSize : 0)
                 
-                Divider()
-                
-                VStack {
+                if editorConfig.mode == .view {
                     HStack {
-                        Text("Links")
+                        Text("Size:")
                         Spacer()
+                        Text(editorConfig.data.formattedSize)
                     }
-                    
-                    if editorConfig.mode == .view {
-                        ForEach($editorConfig.data.driverLinks, id: \.self) { $link in
-                            HStack {
-                                Text(.init("[\(link)](\(link))"))
-                                    .lineLimit(1)
-                                    .padding(2)
-                                Spacer()
-                            }
-                        }
-                    } else {
-                        ForEach($editorConfig.data.driverLinks, id: \.self) { $link in
-                            TextField("https://foo.com", text: $link)
-                                .keyboardType(.URL)
-                        }
-                        .onDelete(perform: { indexSet in
-                            editorConfig.data.driverLinks.remove(atOffsets: indexSet)
-                        })
-                        
-                        Button(
-                            action: {
-                                editorConfig.data.driverLinks.append("")
-                            },
-                            label: {
-                                HStack {
-                                    Image(systemName: "plus.circle.fill").symbolRenderingMode(.multicolor)
-                                    Text("add a link")
+                    .padding(.all, editorConfig.mode == .view ? Helpers.viewPaddingSize : 0)
+                } else {
+                    VStack {
+                        HStack {
+                            Text("Size:")
+                            Spacer()
+                            
+                            TextField("Size", value: $editorConfig.data.size, formatter: Helpers.DecimalHelper())
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.trailing)
+                                /*
+                                .onReceive(Just(driveSize)) { inputValue in
+                                    let filtered = inputValue.filter { "0123456789".contains($0) }
+                                    if filtered != inputValue {
+                                        self.driveSize = filtered
+                                        editorConfig.data.size = Double(filtered)
+                                    }
                                 }
-                            }
-                        )
+                                */
+                        }
+                        
+                        Picker(
+                            selection: $editorConfig.data.sizeType,
+                            label: Text("Sizes")) {
+                                ForEach(SizeTypes.allCases) { size in
+                                    Text(size.displayName).tag(size.id)
+                                }
+                            }.pickerStyle(SegmentedPickerStyle())
                     }
+                }
+                
+                if editorConfig.mode == .view {
+                    HStack {
+                        Text("Working:")
+                        Spacer()
+                        Text(editorConfig.data.isWorking ? "Yes" : "No")
+                    }
+                    .padding(.all, editorConfig.mode == .view ? Helpers.viewPaddingSize : 0)
+                } else {
+                    Toggle("Working", isOn: $editorConfig.data.isWorking)
                 }
                 
                 Spacer()
             }
             .padding()
-            .navigationTitle("\(editorConfig.mode.rawValue) Expansion")
+            .navigationTitle("\(editorConfig.mode.rawValue) Drive")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction, content: {
@@ -141,7 +137,7 @@ struct ExpansionItemControl: View {
                         label: { Text("Cancel") }
                     )
                 })
-                
+
                 ToolbarItem(placement: .confirmationAction, content: {
                     if editorConfig.mode != .view {
                         Button(
@@ -158,23 +154,24 @@ struct ExpansionItemControl: View {
     }
 }
 
+
 #if DEBUG
-struct ExpansionItemControl_Previews: PreviewProvider {
+struct DriveItemControl_Previews: PreviewProvider {
     struct StatefulPreviewWrapper: View {
-        @State var testData: EditorConfig<ExpansionCard>
+        @State var testData: EditorConfig<Drive>
        
         var body: some View {
-            ExpansionItemControl(editorConfig: $testData)
+            DriveItemControl(editorConfig: $testData)
         }
     }
     
     static var previews: some View {
         Group {
             StatefulPreviewWrapper(
-                testData: EditorConfig<ExpansionCard>(data: RetroCollectionItem.testData[1].expansions[1], mode: .view))
+                testData: EditorConfig<Drive>(data: ComputerCollectionItem.testData[1].drives[2], mode: .view))
 
             StatefulPreviewWrapper(
-                testData: EditorConfig<ExpansionCard>(data: RetroCollectionItem.testData[1].expansions[1], mode: .edit))
+                testData: EditorConfig<Drive>(data: ComputerCollectionItem.testData[1].drives[2], mode: .edit))
         }
     }
 }

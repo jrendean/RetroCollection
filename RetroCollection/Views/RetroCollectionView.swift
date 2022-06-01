@@ -12,10 +12,17 @@ import SwiftUI
 
 struct RetroCollectionView: View {
     
-    @Binding var retroCollectionItems: [RetroCollectionItem]
-    @State var newRetroCollectionItem: RetroCollectionItem = RetroCollectionItem()
+    @Binding var computerCollectionItems: [ComputerCollectionItem]
+    @Binding var componentCollectionItems: [ComponentCollectionItem]
+    @Binding var gamingCollectionItems: [GamingCollectionItem]
+    
+    @State var newComputerCollectionItem: ComputerCollectionItem = ComputerCollectionItem()
+    @State var newComponentCollectionItem: ComponentCollectionItem = ComponentCollectionItem()
+    @State var newGamingCollectionItem: GamingCollectionItem = GamingCollectionItem()
     
     @State var showMenu: Bool = false
+    @State var whichView: String = "computer"
+    
     @State var searchText: String
     
     @State var showAddView: Bool = false
@@ -28,19 +35,29 @@ struct RetroCollectionView: View {
                 
                 ZStack(alignment: .leading) {
                     
-                    MainView(retroCollectionItems: self.$retroCollectionItems, searchText: searchText)
+                    // TODO: make enum
+                    switch whichView {
+                    case "computer":
+                        ComputersCollectionView(computerCollectionItems: self.$computerCollectionItems, searchText: searchText)
+                    
+                    case "component":
+                        ComponentsCollectionView(componentCollectionItems: self.$componentCollectionItems, searchText: searchText)
+                        
+                    case "gaming":
+                        GamingCollectionView(gamingCollectionItems: self.$gamingCollectionItems, searchText: searchText)
 
-                    /*
-                     if self.showMenu {
-                        MenuView()
+                    default:
+                        ComputersCollectionView(computerCollectionItems: self.$computerCollectionItems, searchText: searchText)
+                    }
+                    
+                    if self.showMenu {
+                        MenuView(showMenu: $showMenu, whichView: $whichView)
                             .frame(width: geometry.size.width / 2)
                             .transition(.move(edge: .leading))
+                            .zIndex(900)
                     }
-                    */
-
                 }
-                /*
-                 .gesture(DragGesture()
+                .gesture(DragGesture()
                     .onEnded {
                         if $0.translation.width < -100 {
                             withAnimation {
@@ -49,143 +66,285 @@ struct RetroCollectionView: View {
                         }
                     }
                 )
-                */
             }
-            .searchable(text: $searchText)
-            .navigationTitle("Retro Collection").navigationBarTitleDisplayMode(.inline)
+            //.searchable(text: $searchText)
+            .navigationTitle("Retro Collection")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                /*
-                 ToolbarItem(placement: .navigationBarLeading, content: {
-                    Button(
-                        action: {
-                            withAnimation {
-                                self.showMenu.toggle()
-                            }
-                        },
-                        label: { Image(systemName: "line.horizontal.3") }
-                    )
+                
+                ToolbarItem(placement: .navigationBarLeading, content: {
+                    if !showMenu {
+                        Button(
+                            action: {
+                                withAnimation {
+                                    self.showMenu.toggle()
+                                }
+                            },
+                            label: { Image(systemName: "line.horizontal.3") }
+                        )
+                    }
                 })
-                */
                 
                 #if DEBUG
                 ToolbarItem(
                     placement: .navigationBarLeading,
                     content: {
-                        Button(
-                            action: {
-                                DataManager.save(retroCollectionItems: RetroCollectionItem.testData)
-                            },
-                            label: {
-                                Text("T")
-                            }
-                        )
+                        if !showMenu {
+                            Button(
+                                action: {
+                                    DataManager.saveComputersCollection(computerCollectionItems: ComputerCollectionItem.testData)
+                                    DataManager.loadComputersCollection { computerCollectionItems in
+                                        self.computerCollectionItems = computerCollectionItems
+                                    }
+                                    
+                                    DataManager.saveComponentsCollection(componentsCollectionItems: ComponentCollectionItem.testData)
+                                    DataManager.loadComponentsCollection { componentCollectionItems in
+                                        self.componentCollectionItems = componentCollectionItems
+                                    }
+                                    
+                                    DataManager.saveGamingCollection(gamingCollectionItems: GamingCollectionItem.testData)
+                                    DataManager.loadGamingCollection { gamingCollectionItems in
+                                        self.gamingCollectionItems = gamingCollectionItems
+                                    }
+                                },
+                                label: {
+                                    Text("T")
+                                }
+                            )
+                        }
                     })
                 #endif
                 
                 //ToolbarItem(placement: .navigationBarTrailing, content: { EditButton() })
                 
                 ToolbarItem(placement: .navigationBarTrailing, content: {
-                    Button(
-                        action: {
-                            self.showAddView = true
-                        },
-                        label: {
-                            Image(systemName: "plus")
-                        }
-                    )
-                    .disabled(self.showMenu ? true : false)
+                    if !showMenu {
+                        EditButton()
+                    }
                 })
+                
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    if !showMenu {
+                        Button(
+                            action: {
+                                self.showAddView = true
+                            },
+                            label: {
+                                Image(systemName: "plus")
+                            }
+                        )
+                    }
+                })
+
             }
             .fullScreenCover(
                 isPresented: $showAddView,
                 content: {
                     NavigationView {
-                        AddView(retroCollectionItem: $newRetroCollectionItem)
-                            .toolbar {
-                                ToolbarItem(placement: .cancellationAction, content: {
-                                    Button(
-                                        action: {
-                                            showAddView = false
-                                            newRetroCollectionItem = RetroCollectionItem()
-                                        },
-                                        label: { Text("Cancel") }
-                                    )
-                                })
-                                
-                                ToolbarItem(placement: .confirmationAction, content: {
-                                    Button(
-                                        action: {
-                                            showAddView = false
-                                            
-                                            self.retroCollectionItems.append(newRetroCollectionItem)
-                                            
-                                            newRetroCollectionItem = RetroCollectionItem()
-                                            
-                                            DataManager.save(retroCollectionItems: self.retroCollectionItems)
-                                        },
-                                        label: { Text("Save") }
-                                    )
-                                })
-                            }
+                        // TODO: make enum
+                        switch whichView {
+                        case "computer":
+                            getComputerAddView()
+                        
+                        case "component":
+                            getComponentAddView()
+                            
+                        case "gaming":
+                            getGamingAddView()
+
+                        default:
+                            getComputerAddView()
+                        }
                     }
                 })
         }
+        .searchable(text: $searchText)
+    }
+    
+    func getComputerAddView() -> AnyView {
+        return AnyView(
+            ComputersAddView(computerCollectionItem: $newComputerCollectionItem)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction, content: {
+                        Button(
+                            action: {
+                                showAddView = false
+                                
+                                // delete the copied photos that are not saved
+                                //for photo in newRetroCollectionItem.photos {
+                                //    if !photo.saved {
+                                //        //DataManager.deleteImage(filename: photo.id.uuidString)
+                                //    }
+                                //}
+                                
+                                // reset the object
+                                newComputerCollectionItem = ComputerCollectionItem()
+                            },
+                            label: { Text("Cancel") }
+                        )
+                    })
+                    
+                    ToolbarItem(placement: .confirmationAction, content: {
+                        Button(
+                            action: {
+                                showAddView = false
+                                
+                                self.computerCollectionItems.append(newComputerCollectionItem)
+                                
+                                newComputerCollectionItem = ComputerCollectionItem()
+                                
+                                //DataManager.save(retroCollectionItems: self.retroCollectionItems)
+                            },
+                            label: { Text("Save") }
+                        )
+                        .disabled(!newComputerCollectionItem.validView)
+                    })
+                }
+        )
+    }
+    
+    func getComponentAddView() -> AnyView {
+        return AnyView(
+            ComponentsAddView(componentCollectionItem: $newComponentCollectionItem)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction, content: {
+                        Button(
+                            action: {
+                                showAddView = false
+                                
+                                // delete the copied photos that are not saved
+                                //for photo in newRetroCollectionItem.photos {
+                                //    if !photo.saved {
+                                //        //DataManager.deleteImage(filename: photo.id.uuidString)
+                                //    }
+                                //}
+                                
+                                // reset the object
+                                newComponentCollectionItem = ComponentCollectionItem()
+                            },
+                            label: { Text("Cancel") }
+                        )
+                    })
+                    
+                    ToolbarItem(placement: .confirmationAction, content: {
+                        Button(
+                            action: {
+                                showAddView = false
+                                
+                                self.componentCollectionItems.append(newComponentCollectionItem)
+                                
+                                newComponentCollectionItem = ComponentCollectionItem()
+                                
+                                //DataManager.save(retroCollectionItems: self.retroCollectionItems)
+                            },
+                            label: { Text("Save") }
+                        )
+                        .disabled(!newComponentCollectionItem.validView)
+                    })
+                }
+        )
+    }
+    
+    func getGamingAddView() -> AnyView {
+        return AnyView(
+            GamingAddView(gamingCollectionItem: $newGamingCollectionItem)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction, content: {
+                        Button(
+                            action: {
+                                showAddView = false
+                                
+                                // delete the copied photos that are not saved
+                                //for photo in newRetroCollectionItem.photos {
+                                //    if !photo.saved {
+                                //        //DataManager.deleteImage(filename: photo.id.uuidString)
+                                //    }
+                                //}
+                                
+                                // reset the object
+                                newGamingCollectionItem = GamingCollectionItem()
+                            },
+                            label: { Text("Cancel") }
+                        )
+                    })
+                    
+                    ToolbarItem(placement: .confirmationAction, content: {
+                        Button(
+                            action: {
+                                showAddView = false
+                                
+                                self.gamingCollectionItems.append(newGamingCollectionItem)
+                                
+                                newGamingCollectionItem = GamingCollectionItem()
+                                
+                                //DataManager.save(retroCollectionItems: self.retroCollectionItems)
+                            },
+                            label: { Text("Save") }
+                        )
+                        .disabled(!newGamingCollectionItem.validView)
+                    })
+                }
+        )
     }
 }
 
 
-struct MainView: View {
-    
-    @Binding var retroCollectionItems: [RetroCollectionItem]
-    
-    var searchText: String
-    
-    var body: some View {
-        
-        List {
-            ForEach(retroCollectionItems.filter {
-                    searchText == "" || $0.name.contains(searchText) }) { retroCollectionItem in
-                
-                let index = retroCollectionItems.firstIndex(where: { $0.id == retroCollectionItem.id })!
-                let retroCollectionItemBinding = $retroCollectionItems[index]
-                
-                NavigationLink(
-                    destination: DetailView(retroCollectionItems: $retroCollectionItems, retroCollectionItem: retroCollectionItemBinding)) {
-                        
-                        RetroCollectionItemRow(retroCollectionItem: retroCollectionItem)
-                    }
-            }
-            .onDelete(perform: onDelete)
-            .onMove(perform: onMove)
-        }
-    }
-    
-    func onDelete(offsets: IndexSet) {
-        retroCollectionItems.remove(atOffsets: offsets)
-        
-        DataManager.save(retroCollectionItems: RetroCollectionItem.testData)
-    }
-    
-    func onMove(source: IndexSet, destination: Int){
-        retroCollectionItems.move(fromOffsets: source, toOffset: destination)
-    }
-    
-}
+
 
 
 struct MenuView: View {
+    
+    @Binding var showMenu: Bool
+    @Binding var whichView: String
+    
     var body: some View {
         VStack(alignment: .leading) {
+
+            Button(
+                action: {
+                    whichView = "computer"
+                    showMenu = false
+                },
+                label: {
+                    Image(systemName: "pc")
+                        .foregroundColor(.gray)
+                        .imageScale(.large)
+                    Text("Computers")
+                        .foregroundColor(.gray)
+                        .font(.headline)
+                }
+            ).padding(.top, 100)
+                       
+            Button(
+                action: {
+                    whichView = "component"
+                    showMenu = false
+                },
+                label:{
+                    Image(systemName: "memorychip")
+                        .foregroundColor(.gray)
+                        .imageScale(.large)
+                    Text("Components")
+                        .foregroundColor(.gray)
+                        .font(.headline)
+                }
+            ).padding(.top, 20)
             
-            HStack {
-                Image(systemName: "person")
-                    .foregroundColor(.gray)
-                    .imageScale(.large)
-                Text("Profile")
-                    .foregroundColor(.gray)
-                    .font(.headline)
-            }.padding(.top, 100)
-            
+            Button(
+                action: {
+                    whichView = "gaming"
+                    showMenu = false
+                },
+                label: {
+                    Image(systemName: "gamecontroller")
+                        .foregroundColor(.gray)
+                        .imageScale(.large)
+                    Text("Gaming")
+                        .foregroundColor(.gray)
+                        .font(.headline)
+                }
+            ).padding(.top, 20)
+
             Spacer()
             
             HStack(alignment: .bottom) {
@@ -199,18 +358,21 @@ struct MenuView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(red: 32/255, green: 32/255, blue: 32/255))
+        .background(.black)
         .edgesIgnoringSafeArea(.all)
+        .onTapGesture { showMenu = false }
     }
 }
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     struct StatefulPreviewWrapper: View {
-        @State private var testData = RetroCollectionItem.testData
+        @State private var computerTestData = ComputerCollectionItem.testData
+        @State private var componentTestData = ComponentCollectionItem.testData
+        @State private var gamingTestData = GamingCollectionItem.testData
         
         var body: some View {
-            RetroCollectionView(retroCollectionItems: $testData, searchText: "")
+            RetroCollectionView(computerCollectionItems: $computerTestData, componentCollectionItems: $componentTestData, gamingCollectionItems: $gamingTestData, searchText: "")
         }
     }
     

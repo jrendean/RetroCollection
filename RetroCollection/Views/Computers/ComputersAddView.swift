@@ -1,5 +1,5 @@
 //
-//  AddView.swift
+//  ComputersAddView.swift
 //  RetroCollection
 //
 //  Created by JR Endean on 12/29/21.
@@ -7,14 +7,18 @@
 
 import SwiftUI
 
-struct AddView: View {
+struct ComputersAddView: View {
     
-    @Binding var retroCollectionItem: RetroCollectionItem
+    @Binding var computerCollectionItem: ComputerCollectionItem
     
     @State private var driveEditorConfig: EditorConfig = EditorConfig<Drive>()
     @State private var expansionEditorConfig: EditorConfig = EditorConfig<ExpansionCard>()
     @State private var connectionEditorConfig: EditorConfig = EditorConfig<Connection>()
     @State private var operatingSystemEditorConfig: EditorConfig = EditorConfig<OperatingSystem>()
+    
+    @State private var imagePickerEditorConfig: EditorConfig = EditorConfig<UIImage>();
+    @State private var showAddPictureChoices: Bool = false
+    @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     
     var body: some View {
             
@@ -22,48 +26,133 @@ struct AddView: View {
             
             Section("General") {
                 Picker(
-                    selection: $retroCollectionItem.type,
+                    selection: $computerCollectionItem.type,
                     label: Text("Type")) {
                         Text("Desktop").tag("Desktop")
                         Text("Laptop").tag("Laptop")
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 
-                TextField("Manufacturer", text: $retroCollectionItem.manufacturer)
+                TextField("Manufacturer", text: $computerCollectionItem.manufacturer)
                 
-                TextField("Name", text: $retroCollectionItem.name)
+                TextField("Name", text: $computerCollectionItem.name)
                     .disableAutocorrection(true)
                 
-                TextField("Model", text: $retroCollectionItem.model)
+                TextField("Model", text: $computerCollectionItem.model)
                     .disableAutocorrection(true)
             
                 DisclosureGroup("Details") {
                     
-                    TextField("Model Number", text: $retroCollectionItem.modelNumber)
+                    TextField("Model Number", text: $computerCollectionItem.modelNumber)
                         .disableAutocorrection(true)
                     
-                    TextField("Serial Number", text: $retroCollectionItem.serialNumber)
+                    TextField("Serial Number", text: $computerCollectionItem.serialNumber)
                         .disableAutocorrection(true)
                     
-                    TextField("CodeName", text: $retroCollectionItem.codeName)
+                    TextField("CodeName", text: $computerCollectionItem.codeName)
                         .disableAutocorrection(true)
                     
-                    TextField("Also Known As", text: $retroCollectionItem.alsoKnownAs)
+                    TextField("Also Known As", text: $computerCollectionItem.alsoKnownAs)
                         .disableAutocorrection(true)
                 
                     DatePicker(
                         "Released",
-                        selection:$retroCollectionItem.releasedDate,
+                        selection:$computerCollectionItem.releasedDate,
                         displayedComponents: .date)
                         .datePickerStyle(.compact)
                     
                     DatePicker(
                         "Discontinued",
-                        selection:$retroCollectionItem.discontinuedDate,
+                        selection:$computerCollectionItem.discontinuedDate,
                         displayedComponents: .date)
                         .datePickerStyle(.compact)
                 }
             }
+            
+            Section(
+                header:
+                    HStack {
+                        Text("Photos")
+                        Spacer()
+                        Button(
+                            action: {
+                                showAddPictureChoices = true
+                            },
+                            label: { Image(systemName: "plus") })
+                    },
+                content: {
+                    ScrollView(.horizontal) {
+                        HStack {
+                            if computerCollectionItem.photos.isEmpty {
+                                Text("None")
+                            }
+                            else {
+                                ForEach($computerCollectionItem.photos) { photo in
+                                    ZStack(alignment: .bottom) {
+                                        //let image = DataManager.loadImage(filename: photo.id.uuidString)
+                                        let imageData = photo.image.imageData
+                                    
+                                        Image.init(uiImage: UIImage(data: imageData.wrappedValue)!)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 360)
+                                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                                            .shadow(radius: 5)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(Color.white, lineWidth: 5)
+                                            )
+                                        
+                                        HStack {
+                                            DefaultButton(photo: photo, retroCollectionItem: $computerCollectionItem)
+                                            
+                                            Button(action: {
+                                                let index = computerCollectionItem.photos.firstIndex(where: { $0.id == photo.id })
+                                                computerCollectionItem.photos.remove(at: index!)
+                                                //DataManager.deleteImage(filename: photo.id.uuidString)
+                                            }, label: {
+                                                Text(Image(systemName:"trash.circle"))
+                                                    .font(.title)
+                                            })
+                                            .padding(3)
+                                            .background(Color.white)
+                                            .foregroundColor(.accentColor)
+                                            .clipShape(Circle())
+                                            .shadow(radius: 5)
+                                        }.padding([.bottom], 10)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sheet(
+                        isPresented: $imagePickerEditorConfig.shouldShowAdd,
+                        onDismiss: {
+                            if imagePickerEditorConfig.needsSave {
+                                let photo = Photo(image: ImageWrapper(image: imagePickerEditorConfig.data), saved: false)
+                                //DataManager.saveImage(filename: photo.id.uuidString, image: imagePickerEditorConfig.data)
+                                computerCollectionItem.photos.append(photo)
+                            }
+                        },
+                        content: {
+                            ImagePicker(sourceType: imagePickerSourceType, editorConfig: $imagePickerEditorConfig)
+                        }
+                    )
+                    .confirmationDialog(
+                        "Add picture",
+                        isPresented: $showAddPictureChoices) {
+                            Button("Camera"){
+                                imagePickerSourceType = .camera
+                                imagePickerEditorConfig.present(mode: .add, data: UIImage())
+                            }
+                            
+                            Button("Library") {
+                                imagePickerSourceType = .photoLibrary
+                                imagePickerEditorConfig.present(mode: .add, data: UIImage())
+                            }
+                        }
+                }
+            )
             
             Section(
                 header:
@@ -77,7 +166,7 @@ struct AddView: View {
                             label: { Image(systemName: "plus") })
                     },
                 content: {
-                    ForEach ($retroCollectionItem.drives) { $drive in
+                    ForEach ($computerCollectionItem.drives) { $drive in
                         HStack {
                             Text(drive.type.rawValue)
                             Spacer()
@@ -89,14 +178,14 @@ struct AddView: View {
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        retroCollectionItem.drives.remove(atOffsets: indexSet)
+                        computerCollectionItem.drives.remove(atOffsets: indexSet)
                     })
                     .sheet(
                         isPresented: $driveEditorConfig.shouldShowEdit,
                         onDismiss: {
                             if driveEditorConfig.needsSave {
-                                let index = retroCollectionItem.drives.firstIndex(where: { $0.id == $driveEditorConfig.data.id })!
-                                retroCollectionItem.drives[index] = driveEditorConfig.data
+                                let index = computerCollectionItem.drives.firstIndex(where: { $0.id == $driveEditorConfig.data.id })!
+                                computerCollectionItem.drives[index] = driveEditorConfig.data
                             }
                         },
                         content: {
@@ -108,7 +197,7 @@ struct AddView: View {
                     isPresented: $driveEditorConfig.shouldShowAdd,
                     onDismiss: {
                         if driveEditorConfig.needsSave {
-                            self.retroCollectionItem.drives.append(driveEditorConfig.data)
+                            self.computerCollectionItem.drives.append(driveEditorConfig.data)
                         }
                     },
                     content: {
@@ -129,7 +218,7 @@ struct AddView: View {
                             label: { Image(systemName: "plus") })
                     },
                 content: {
-                    ForEach ($retroCollectionItem.expansions) { $expansion in
+                    ForEach ($computerCollectionItem.expansions) { $expansion in
                         HStack {
                             Text(expansion.type.rawValue)
                             Spacer()
@@ -141,14 +230,14 @@ struct AddView: View {
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        retroCollectionItem.expansions.remove(atOffsets: indexSet)
+                        computerCollectionItem.expansions.remove(atOffsets: indexSet)
                     })
                     .sheet(
                         isPresented: $expansionEditorConfig.shouldShowEdit,
                         onDismiss: {
                             if expansionEditorConfig.needsSave {
-                                let index = retroCollectionItem.expansions.firstIndex(where: { $0.id == $expansionEditorConfig.data.id })!
-                                retroCollectionItem.expansions[index] = expansionEditorConfig.data
+                                let index = computerCollectionItem.expansions.firstIndex(where: { $0.id == $expansionEditorConfig.data.id })!
+                                computerCollectionItem.expansions[index] = expansionEditorConfig.data
                             }
                         },
                         content: {
@@ -160,7 +249,7 @@ struct AddView: View {
                     isPresented: $expansionEditorConfig.shouldShowAdd,
                     onDismiss: {
                         if expansionEditorConfig.needsSave {
-                            self.retroCollectionItem.expansions.append(expansionEditorConfig.data)
+                            self.computerCollectionItem.expansions.append(expansionEditorConfig.data)
                         }
                     },
                     content: {
@@ -181,7 +270,7 @@ struct AddView: View {
                             label: { Image(systemName: "plus") })
                     },
                 content: {
-                    ForEach ($retroCollectionItem.connections) { $connection in
+                    ForEach ($computerCollectionItem.connections) { $connection in
                         HStack {
                             Text(connection.type.rawValue)
                             Spacer()
@@ -193,14 +282,14 @@ struct AddView: View {
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        retroCollectionItem.connections.remove(atOffsets: indexSet)
+                        computerCollectionItem.connections.remove(atOffsets: indexSet)
                     })
                     .sheet(
                         isPresented: $connectionEditorConfig.shouldShowEdit,
                         onDismiss: {
                             if connectionEditorConfig.needsSave {
-                                let index = retroCollectionItem.connections.firstIndex(where: { $0.id == $connectionEditorConfig.data.id })!
-                                retroCollectionItem.connections[index] = connectionEditorConfig.data
+                                let index = computerCollectionItem.connections.firstIndex(where: { $0.id == $connectionEditorConfig.data.id })!
+                                computerCollectionItem.connections[index] = connectionEditorConfig.data
                             }
                         },
                         content: {
@@ -212,7 +301,7 @@ struct AddView: View {
                     isPresented: $connectionEditorConfig.shouldShowAdd,
                     onDismiss: {
                         if connectionEditorConfig.needsSave {
-                            self.retroCollectionItem.connections.append(connectionEditorConfig.data)
+                            self.computerCollectionItem.connections.append(connectionEditorConfig.data)
                         }
                     },
                     content: {
@@ -233,7 +322,7 @@ struct AddView: View {
                             label: { Image(systemName: "plus") })
                     },
                 content: {
-                    ForEach ($retroCollectionItem.operatingSystems) { $operatingSystem in
+                    ForEach ($computerCollectionItem.operatingSystems) { $operatingSystem in
                         HStack {
                             Text("\(operatingSystem.name) \(operatingSystem.version)")
                             Spacer()
@@ -251,14 +340,14 @@ struct AddView: View {
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        retroCollectionItem.operatingSystems.remove(atOffsets: indexSet)
+                        computerCollectionItem.operatingSystems.remove(atOffsets: indexSet)
                     })
                 })
                 .sheet(
                     isPresented: $operatingSystemEditorConfig.shouldShowAdd,
                     onDismiss: {
                          if operatingSystemEditorConfig.needsSave {
-                            self.retroCollectionItem.operatingSystems.append(operatingSystemEditorConfig.data)
+                            self.computerCollectionItem.operatingSystems.append(operatingSystemEditorConfig.data)
                         }
                     },
                     content: {
@@ -274,17 +363,17 @@ struct AddView: View {
                         Spacer()
                         Button(
                             action: {
-                                retroCollectionItem.links.append("")
+                                computerCollectionItem.links.append("")
                             },
                             label: { Image(systemName: "plus") })
                     },
                 content: {
-                    ForEach($retroCollectionItem.links, id: \.self) { $link in
+                    ForEach($computerCollectionItem.links, id: \.self) { $link in
                         TextField("https://foo.com", text: $link)
                             .keyboardType(.URL)
                     }
                     .onDelete(perform: { indexSet in
-                        retroCollectionItem.links.remove(atOffsets: indexSet)
+                        computerCollectionItem.links.remove(atOffsets: indexSet)
                     })
                     
                 }
@@ -292,24 +381,24 @@ struct AddView: View {
             
             
             DisclosureGroup("Maintenance") {
-                Toggle("Recapped:", isOn: $retroCollectionItem.maintenance.recapped)
+                Toggle("Recapped:", isOn: $computerCollectionItem.maintenance.recapped)
                 
                 HStack {
                     Text("Battery State:")
                     Spacer()
-                    TextField("Battery State", text: $retroCollectionItem.maintenance.batteryState)
+                    TextField("Battery State", text: $computerCollectionItem.maintenance.batteryState)
                 }
                 
                 HStack {
                     Text("Known Issues:")
                     Spacer()
-                    TextField("Known Issues", text: $retroCollectionItem.maintenance.knownIssues)
+                    TextField("Known Issues", text: $computerCollectionItem.maintenance.knownIssues)
                 }
 
                 HStack {
                     Text("Notes:")
                     Spacer()
-                    TextField("Notes", text: $retroCollectionItem.maintenance.notes)
+                    TextField("Notes", text: $computerCollectionItem.maintenance.notes)
                 }
             }
             
@@ -322,12 +411,11 @@ struct AddView: View {
 
 #if DEBUG
 struct AddView_Previews: PreviewProvider {
-
     struct StatefulPreviewWrapper: View {
-        @State private var newRetroCollectionItem: RetroCollectionItem = RetroCollectionItem()
+        @State private var newItem: ComputerCollectionItem = ComputerCollectionItem()
         
         var body: some View {
-            AddView(retroCollectionItem: $newRetroCollectionItem)
+            ComputersAddView(computerCollectionItem: $newItem)
         }
     }
     

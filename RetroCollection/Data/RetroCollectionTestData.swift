@@ -7,14 +7,50 @@
 
 import Foundation
 
-extension RetroCollectionItem {
-    static var testData: [RetroCollectionItem]
-    {
+extension ComponentCollectionItem {
+    
+    static var testData: [ComponentCollectionItem] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+       
+        return [
+            ComponentCollectionItem(
+                name: "component test item 1"
+            ),
+            ComponentCollectionItem(
+                name: "component test item 2"
+            )
+        ]
+    }
+}
+
+extension GamingCollectionItem {
+    
+    static var testData: [GamingCollectionItem] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+       
+        return [
+            GamingCollectionItem(
+                manufacturer: "Nintendo",
+                name: "Nintendo Entertainment System"
+            ),
+            GamingCollectionItem(
+                manufacturer: "Microsoft",
+                name: "Xbox"
+            )
+        ]
+    }
+}
+
+extension ComputerCollectionItem {
+    
+    static var testData: [ComputerCollectionItem] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         return [
-            RetroCollectionItem(
+            ComputerCollectionItem(
                 type: "Laptop",
                 manufacturer: "Apple",
                 name: "PowerBook FireWire",
@@ -96,7 +132,7 @@ extension RetroCollectionItem {
                 ]
             ),
             
-            RetroCollectionItem(
+            ComputerCollectionItem(
                 type: "Desktop",
                 manufacturer: "Packard Bell",
                 name: "Pack-Mate 4100CD",

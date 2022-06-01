@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension RetroCollectionItem {
+extension ComputerCollectionItem {
     
     var releasedDateFormatted: String {
         if (releasedDate == Date.distantPast) {
@@ -50,4 +50,13 @@ extension RetroCollectionItem {
     var processorInfo: String {
         return "\(cpu.model) \(Helpers.DecimalHelper().string(from: NSNumber(value: cpu.speed)) ?? "0") \(cpu.speedType.displayName)"
     }
+    
+    
+    
+    var validView: Bool {
+        type != "" &&
+        manufacturer != "" &&
+        name != ""
+    }
+    
 }

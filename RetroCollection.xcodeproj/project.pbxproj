@@ -11,10 +11,33 @@
 		2B063CEB277E6525005B0A1B /* SizeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CEA277E6525005B0A1B /* SizeTypes.swift */; };
 		2B063CED277E6548005B0A1B /* SpeedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CEC277E6548005B0A1B /* SpeedTypes.swift */; };
 		2B063CEF277E89E2005B0A1B /* OperatingSystemItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */; };
-		2B14D4D4277CD25B0076A8A4 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B14D4D3277CD25B0076A8A4 /* AddView.swift */; };
+		2B14D4D4277CD25B0076A8A4 /* ComputersAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B14D4D3277CD25B0076A8A4 /* ComputersAddView.swift */; };
+		2B175BE62845C2FE009C7640 /* ComputersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BE52845C2FE009C7640 /* ComputersCollectionView.swift */; };
+		2B175BE82845C4BA009C7640 /* ComputerCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BE72845C4BA009C7640 /* ComputerCollectionItem.swift */; };
+		2B175BEA2845C4DE009C7640 /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BE92845C4DE009C7640 /* CPU.swift */; };
+		2B175BEC2845C4EE009C7640 /* Motherboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BEB2845C4EE009C7640 /* Motherboard.swift */; };
+		2B175BEE2845C4F8009C7640 /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BED2845C4F8009C7640 /* Battery.swift */; };
+		2B175BF02845C52E009C7640 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BEF2845C52E009C7640 /* Screen.swift */; };
+		2B175BF22845C54C009C7640 /* OperatingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BF12845C54C009C7640 /* OperatingSystem.swift */; };
+		2B175BF42845C567009C7640 /* Maintenance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BF32845C567009C7640 /* Maintenance.swift */; };
+		2B175BF62845C841009C7640 /* ComponentsAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BF52845C841009C7640 /* ComponentsAddView.swift */; };
+		2B175BF82845CC03009C7640 /* ComponentCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BF72845CC03009C7640 /* ComponentCollectionItem.swift */; };
+		2B175BFA2845CC61009C7640 /* GamingCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BF92845CC61009C7640 /* GamingCollectionItem.swift */; };
+		2B175BFE2845CCB8009C7640 /* ComponentsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175BFD2845CCB8009C7640 /* ComponentsDetailView.swift */; };
+		2B175C022845CCED009C7640 /* ComponentsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C012845CCED009C7640 /* ComponentsEditView.swift */; };
+		2B175C042845CD1D009C7640 /* ComponentsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C032845CD1D009C7640 /* ComponentsCollectionView.swift */; };
+		2B175C092845CD63009C7640 /* GamingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C052845CD63009C7640 /* GamingCollectionView.swift */; };
+		2B175C0A2845CD63009C7640 /* GamingAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C062845CD63009C7640 /* GamingAddView.swift */; };
+		2B175C0B2845CD63009C7640 /* GamingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C072845CD63009C7640 /* GamingDetailView.swift */; };
+		2B175C0C2845CD63009C7640 /* GamingEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C082845CD63009C7640 /* GamingEditView.swift */; };
+		2B175C0E28471E5C009C7640 /* ComponentItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C0D28471E5C009C7640 /* ComponentItemRow.swift */; };
+		2B175C1028471E69009C7640 /* GamingItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C0F28471E69009C7640 /* GamingItemRow.swift */; };
+		2B175C12284728AA009C7640 /* ComponentCollectionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C11284728AA009C7640 /* ComponentCollectionItemViewModel.swift */; };
+		2B175C14284728B8009C7640 /* GamingCollectionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B175C13284728B7009C7640 /* GamingCollectionItemViewModel.swift */; };
 		2B21B84B277AE02600FEE58F /* collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B21B84A277ADFEB00FEE58F /* collection.json */; };
 		2B2FB0B9277C228D00D1EA51 /* DrivesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2FB0B8277C228D00D1EA51 /* DrivesViewModel.swift */; };
-		2B2FB0BB277C229600D1EA51 /* RetroCollectionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2FB0BA277C229600D1EA51 /* RetroCollectionItemViewModel.swift */; };
+		2B2FB0BB277C229600D1EA51 /* ComputerCollectionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2FB0BA277C229600D1EA51 /* ComputerCollectionItemViewModel.swift */; };
+		2B44F5FF27F2BDA800C41A35 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44F5FE27F2BDA800C41A35 /* Photo.swift */; };
 		2B4A1B27277E1A770098E1EA /* ConnectionItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */; };
 		2B4A1B29277E1A860098E1EA /* ExpansionItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */; };
 		2B5D1354277D6F0D00DBC03E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D1353277D6F0D00DBC03E /* Helpers.swift */; };
@@ -26,14 +49,15 @@
 		2B7DA86D2779108200F4FA09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B7DA86C2779108200F4FA09 /* Assets.xcassets */; };
 		2B7DA8702779108200F4FA09 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B7DA86F2779108200F4FA09 /* Preview Assets.xcassets */; };
 		2B7DA878277910EF00F4FA09 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA877277910EF00F4FA09 /* DataManager.swift */; };
-		2B7DA87A2779114500F4FA09 /* RetroCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA8792779114500F4FA09 /* RetroCollectionItem.swift */; };
 		2B7DA87C27791E4E00F4FA09 /* RetroCollectionTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA87B27791E4E00F4FA09 /* RetroCollectionTestData.swift */; };
-		2B7DA87E2779341000F4FA09 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA87D2779341000F4FA09 /* DetailView.swift */; };
-		2B7DA8802779341D00F4FA09 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA87F2779341C00F4FA09 /* EditView.swift */; };
-		2B7DA882277934F200F4FA09 /* RetroCollectionItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA881277934F200F4FA09 /* RetroCollectionItemRow.swift */; };
+		2B7DA87E2779341000F4FA09 /* ComputersDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA87D2779341000F4FA09 /* ComputersDetailView.swift */; };
+		2B7DA8802779341D00F4FA09 /* ComputersEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA87F2779341C00F4FA09 /* ComputersEditView.swift */; };
+		2B7DA882277934F200F4FA09 /* ComputersItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA881277934F200F4FA09 /* ComputersItemRow.swift */; };
 		2B7DA884277A608B00F4FA09 /* Drives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA883277A608B00F4FA09 /* Drives.swift */; };
 		2B7DA886277A630800F4FA09 /* ExpansionCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA885277A630800F4FA09 /* ExpansionCards.swift */; };
 		2B7DA888277A659500F4FA09 /* Connections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7DA887277A659500F4FA09 /* Connections.swift */; };
+		2BA32F73278D3ED300AE025D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA32F72278D3ED300AE025D /* ImagePicker.swift */; };
+		2BAE119C27F406FC00288844 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE119B27F406FC00288844 /* DefaultButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,10 +65,33 @@
 		2B063CEA277E6525005B0A1B /* SizeTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTypes.swift; sourceTree = "<group>"; };
 		2B063CEC277E6548005B0A1B /* SpeedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTypes.swift; sourceTree = "<group>"; };
 		2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingSystemItemControl.swift; sourceTree = "<group>"; };
-		2B14D4D3277CD25B0076A8A4 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		2B14D4D3277CD25B0076A8A4 /* ComputersAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputersAddView.swift; sourceTree = "<group>"; };
+		2B175BE52845C2FE009C7640 /* ComputersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputersCollectionView.swift; sourceTree = "<group>"; };
+		2B175BE72845C4BA009C7640 /* ComputerCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerCollectionItem.swift; sourceTree = "<group>"; };
+		2B175BE92845C4DE009C7640 /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
+		2B175BEB2845C4EE009C7640 /* Motherboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motherboard.swift; sourceTree = "<group>"; };
+		2B175BED2845C4F8009C7640 /* Battery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
+		2B175BEF2845C52E009C7640 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		2B175BF12845C54C009C7640 /* OperatingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingSystem.swift; sourceTree = "<group>"; };
+		2B175BF32845C567009C7640 /* Maintenance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maintenance.swift; sourceTree = "<group>"; };
+		2B175BF52845C841009C7640 /* ComponentsAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsAddView.swift; sourceTree = "<group>"; };
+		2B175BF72845CC03009C7640 /* ComponentCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCollectionItem.swift; sourceTree = "<group>"; };
+		2B175BF92845CC61009C7640 /* GamingCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingCollectionItem.swift; sourceTree = "<group>"; };
+		2B175BFD2845CCB8009C7640 /* ComponentsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsDetailView.swift; sourceTree = "<group>"; };
+		2B175C012845CCED009C7640 /* ComponentsEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsEditView.swift; sourceTree = "<group>"; };
+		2B175C032845CD1D009C7640 /* ComponentsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsCollectionView.swift; sourceTree = "<group>"; };
+		2B175C052845CD63009C7640 /* GamingCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamingCollectionView.swift; sourceTree = "<group>"; };
+		2B175C062845CD63009C7640 /* GamingAddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamingAddView.swift; sourceTree = "<group>"; };
+		2B175C072845CD63009C7640 /* GamingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamingDetailView.swift; sourceTree = "<group>"; };
+		2B175C082845CD63009C7640 /* GamingEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamingEditView.swift; sourceTree = "<group>"; };
+		2B175C0D28471E5C009C7640 /* ComponentItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentItemRow.swift; sourceTree = "<group>"; };
+		2B175C0F28471E69009C7640 /* GamingItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingItemRow.swift; sourceTree = "<group>"; };
+		2B175C11284728AA009C7640 /* ComponentCollectionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCollectionItemViewModel.swift; sourceTree = "<group>"; };
+		2B175C13284728B7009C7640 /* GamingCollectionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingCollectionItemViewModel.swift; sourceTree = "<group>"; };
 		2B21B84A277ADFEB00FEE58F /* collection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = collection.json; sourceTree = "<group>"; };
 		2B2FB0B8277C228D00D1EA51 /* DrivesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivesViewModel.swift; sourceTree = "<group>"; };
-		2B2FB0BA277C229600D1EA51 /* RetroCollectionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroCollectionItemViewModel.swift; sourceTree = "<group>"; };
+		2B2FB0BA277C229600D1EA51 /* ComputerCollectionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerCollectionItemViewModel.swift; sourceTree = "<group>"; };
+		2B44F5FE27F2BDA800C41A35 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemControl.swift; sourceTree = "<group>"; };
 		2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionItemControl.swift; sourceTree = "<group>"; };
 		2B5D1353277D6F0D00DBC03E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -57,15 +104,17 @@
 		2B7DA86C2779108200F4FA09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B7DA86F2779108200F4FA09 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B7DA877277910EF00F4FA09 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		2B7DA8792779114500F4FA09 /* RetroCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroCollectionItem.swift; sourceTree = "<group>"; };
 		2B7DA87B27791E4E00F4FA09 /* RetroCollectionTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroCollectionTestData.swift; sourceTree = "<group>"; };
-		2B7DA87D2779341000F4FA09 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		2B7DA87F2779341C00F4FA09 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
-		2B7DA881277934F200F4FA09 /* RetroCollectionItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroCollectionItemRow.swift; sourceTree = "<group>"; };
+		2B7DA87D2779341000F4FA09 /* ComputersDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputersDetailView.swift; sourceTree = "<group>"; };
+		2B7DA87F2779341C00F4FA09 /* ComputersEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputersEditView.swift; sourceTree = "<group>"; };
+		2B7DA881277934F200F4FA09 /* ComputersItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputersItemRow.swift; sourceTree = "<group>"; };
 		2B7DA883277A608B00F4FA09 /* Drives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drives.swift; sourceTree = "<group>"; };
 		2B7DA885277A630800F4FA09 /* ExpansionCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionCards.swift; sourceTree = "<group>"; };
 		2B7DA887277A659500F4FA09 /* Connections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connections.swift; sourceTree = "<group>"; };
 		2BA32F70277FBC2C00AE025D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2BA32F712783F13B00AE025D /* RetroCollection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RetroCollection.entitlements; sourceTree = "<group>"; };
+		2BA32F72278D3ED300AE025D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		2BAE119B27F406FC00288844 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,11 +128,122 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B2FB0B7277C222400D1EA51 /* ViewModels */ = {
+		2B175BD82845C151009C7640 /* Computers */ = {
+			isa = PBXGroup;
+			children = (
+				2B14D4D3277CD25B0076A8A4 /* ComputersAddView.swift */,
+				2B175BE52845C2FE009C7640 /* ComputersCollectionView.swift */,
+				2B7DA87D2779341000F4FA09 /* ComputersDetailView.swift */,
+				2B7DA87F2779341C00F4FA09 /* ComputersEditView.swift */,
+			);
+			path = Computers;
+			sourceTree = "<group>";
+		};
+		2B175BD92845C15C009C7640 /* Gaming */ = {
+			isa = PBXGroup;
+			children = (
+				2B175C062845CD63009C7640 /* GamingAddView.swift */,
+				2B175C052845CD63009C7640 /* GamingCollectionView.swift */,
+				2B175C072845CD63009C7640 /* GamingDetailView.swift */,
+				2B175C082845CD63009C7640 /* GamingEditView.swift */,
+			);
+			path = Gaming;
+			sourceTree = "<group>";
+		};
+		2B175BDA2845C163009C7640 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B175BF52845C841009C7640 /* ComponentsAddView.swift */,
+				2B175C032845CD1D009C7640 /* ComponentsCollectionView.swift */,
+				2B175BFD2845CCB8009C7640 /* ComponentsDetailView.swift */,
+				2B175C012845CCED009C7640 /* ComponentsEditView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2B175BDB2845C190009C7640 /* Computers */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DA881277934F200F4FA09 /* ComputersItemRow.swift */,
+				2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */,
+				2B5EB212277D1A3B00DFE426 /* DriveItemControl.swift */,
+				2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */,
+				2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */,
+			);
+			path = Computers;
+			sourceTree = "<group>";
+		};
+		2B175BDC2845C1A6009C7640 /* Computers */ = {
 			isa = PBXGroup;
 			children = (
 				2B2FB0B8277C228D00D1EA51 /* DrivesViewModel.swift */,
-				2B2FB0BA277C229600D1EA51 /* RetroCollectionItemViewModel.swift */,
+				2B2FB0BA277C229600D1EA51 /* ComputerCollectionItemViewModel.swift */,
+			);
+			path = Computers;
+			sourceTree = "<group>";
+		};
+		2B175BDD2845C1D2009C7640 /* Computers */ = {
+			isa = PBXGroup;
+			children = (
+				2B175BE72845C4BA009C7640 /* ComputerCollectionItem.swift */,
+			);
+			path = Computers;
+			sourceTree = "<group>";
+		};
+		2B175BDE2845C1F7009C7640 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B175BF72845CC03009C7640 /* ComponentCollectionItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2B175BDF2845C1FF009C7640 /* Gaming */ = {
+			isa = PBXGroup;
+			children = (
+				2B175BF92845CC61009C7640 /* GamingCollectionItem.swift */,
+			);
+			path = Gaming;
+			sourceTree = "<group>";
+		};
+		2B175BE02845C210009C7640 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B175C11284728AA009C7640 /* ComponentCollectionItemViewModel.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2B175BE12845C215009C7640 /* Gaming */ = {
+			isa = PBXGroup;
+			children = (
+				2B175C13284728B7009C7640 /* GamingCollectionItemViewModel.swift */,
+			);
+			path = Gaming;
+			sourceTree = "<group>";
+		};
+		2B175BE22845C264009C7640 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B175C0D28471E5C009C7640 /* ComponentItemRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2B175BE32845C271009C7640 /* Gaming */ = {
+			isa = PBXGroup;
+			children = (
+				2B175C0F28471E69009C7640 /* GamingItemRow.swift */,
+			);
+			path = Gaming;
+			sourceTree = "<group>";
+		};
+		2B2FB0B7277C222400D1EA51 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2B175BE02845C210009C7640 /* Components */,
+				2B175BDC2845C1A6009C7640 /* Computers */,
+				2B175BE12845C215009C7640 /* Gaming */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -91,9 +251,9 @@
 		2B2FB0BC277C22C600D1EA51 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2B21B84A277ADFEB00FEE58F /* collection.json */,
 				2B7DA877277910EF00F4FA09 /* DataManager.swift */,
 				2B7DA87B27791E4E00F4FA09 /* RetroCollectionTestData.swift */,
-				2B21B84A277ADFEB00FEE58F /* collection.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -101,12 +261,12 @@
 		2B2FB0BD277C247B00D1EA51 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				2B7DA881277934F200F4FA09 /* RetroCollectionItemRow.swift */,
-				2B4A1B26277E1A770098E1EA /* ConnectionItemControl.swift */,
-				2B5EB212277D1A3B00DFE426 /* DriveItemControl.swift */,
-				2B4A1B28277E1A860098E1EA /* ExpansionItemControl.swift */,
-				2B063CEE277E89E2005B0A1B /* OperatingSystemItemControl.swift */,
+				2B175BE22845C264009C7640 /* Components */,
+				2B175BDB2845C190009C7640 /* Computers */,
+				2BAE119B27F406FC00288844 /* DefaultButton.swift */,
 				2B5EB210277D192D00DFE426 /* FloatingMenuControl.swift */,
+				2B175BE32845C271009C7640 /* Gaming */,
+				2BA32F72278D3ED300AE025D /* ImagePicker.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -114,10 +274,10 @@
 		2B2FB0BE277C248300D1EA51 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B175BDA2845C163009C7640 /* Components */,
+				2B175BD82845C151009C7640 /* Computers */,
+				2B175BD92845C15C009C7640 /* Gaming */,
 				2B7DA86A2779108100F4FA09 /* RetroCollectionView.swift */,
-				2B7DA87D2779341000F4FA09 /* DetailView.swift */,
-				2B7DA87F2779341C00F4FA09 /* EditView.swift */,
-				2B14D4D3277CD25B0076A8A4 /* AddView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,8 +285,8 @@
 		2B5D1352277D53C600DBC03E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2B5D1353277D6F0D00DBC03E /* Helpers.swift */,
 				2B5D1355277D708A00DBC03E /* EditorConfig.swift */,
+				2B5D1353277D6F0D00DBC03E /* Helpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -150,6 +310,7 @@
 		2B7DA8672779108100F4FA09 /* RetroCollection */ = {
 			isa = PBXGroup;
 			children = (
+				2BA32F712783F13B00AE025D /* RetroCollection.entitlements */,
 				2BA32F70277FBC2C00AE025D /* Info.plist */,
 				2B7DA8682779108100F4FA09 /* RetroCollectionApp.swift */,
 				2B2FB0BE277C248300D1EA51 /* Views */,
@@ -175,11 +336,20 @@
 		2B7DA876277910CB00F4FA09 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2B7DA8792779114500F4FA09 /* RetroCollectionItem.swift */,
+				2B175BED2845C4F8009C7640 /* Battery.swift */,
+				2B175BDE2845C1F7009C7640 /* Components */,
+				2B175BDD2845C1D2009C7640 /* Computers */,
 				2B7DA887277A659500F4FA09 /* Connections.swift */,
+				2B175BE92845C4DE009C7640 /* CPU.swift */,
 				2B7DA883277A608B00F4FA09 /* Drives.swift */,
 				2B7DA885277A630800F4FA09 /* ExpansionCards.swift */,
+				2B175BDF2845C1FF009C7640 /* Gaming */,
+				2B175BF32845C567009C7640 /* Maintenance.swift */,
+				2B175BEB2845C4EE009C7640 /* Motherboard.swift */,
+				2B175BF12845C54C009C7640 /* OperatingSystem.swift */,
+				2B44F5FE27F2BDA800C41A35 /* Photo.swift */,
 				2B063CE8277E64C4005B0A1B /* RAM.swift */,
+				2B175BEF2845C52E009C7640 /* Screen.swift */,
 				2B063CEA277E6525005B0A1B /* SizeTypes.swift */,
 				2B063CEC277E6548005B0A1B /* SpeedTypes.swift */,
 			);
@@ -257,29 +427,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B175BE82845C4BA009C7640 /* ComputerCollectionItem.swift in Sources */,
 				2B063CE9277E64C4005B0A1B /* RAM.swift in Sources */,
-				2B14D4D4277CD25B0076A8A4 /* AddView.swift in Sources */,
+				2B175C092845CD63009C7640 /* GamingCollectionView.swift in Sources */,
+				2B175BEA2845C4DE009C7640 /* CPU.swift in Sources */,
+				2B175BEE2845C4F8009C7640 /* Battery.swift in Sources */,
+				2B14D4D4277CD25B0076A8A4 /* ComputersAddView.swift in Sources */,
+				2BA32F73278D3ED300AE025D /* ImagePicker.swift in Sources */,
 				2B2FB0B9277C228D00D1EA51 /* DrivesViewModel.swift in Sources */,
+				2B175BF62845C841009C7640 /* ComponentsAddView.swift in Sources */,
+				2BAE119C27F406FC00288844 /* DefaultButton.swift in Sources */,
 				2B4A1B29277E1A860098E1EA /* ExpansionItemControl.swift in Sources */,
-				2B7DA87A2779114500F4FA09 /* RetroCollectionItem.swift in Sources */,
-				2B7DA87E2779341000F4FA09 /* DetailView.swift in Sources */,
+				2B44F5FF27F2BDA800C41A35 /* Photo.swift in Sources */,
+				2B175BFA2845CC61009C7640 /* GamingCollectionItem.swift in Sources */,
+				2B7DA87E2779341000F4FA09 /* ComputersDetailView.swift in Sources */,
 				2B7DA86B2779108100F4FA09 /* RetroCollectionView.swift in Sources */,
+				2B175C0A2845CD63009C7640 /* GamingAddView.swift in Sources */,
 				2B7DA878277910EF00F4FA09 /* DataManager.swift in Sources */,
+				2B175C0B2845CD63009C7640 /* GamingDetailView.swift in Sources */,
 				2B063CEB277E6525005B0A1B /* SizeTypes.swift in Sources */,
+				2B175BE62845C2FE009C7640 /* ComputersCollectionView.swift in Sources */,
 				2B5EB211277D192D00DFE426 /* FloatingMenuControl.swift in Sources */,
 				2B063CED277E6548005B0A1B /* SpeedTypes.swift in Sources */,
 				2B7DA888277A659500F4FA09 /* Connections.swift in Sources */,
-				2B7DA8802779341D00F4FA09 /* EditView.swift in Sources */,
+				2B175C0C2845CD63009C7640 /* GamingEditView.swift in Sources */,
+				2B175C14284728B8009C7640 /* GamingCollectionItemViewModel.swift in Sources */,
+				2B175C0E28471E5C009C7640 /* ComponentItemRow.swift in Sources */,
+				2B175BEC2845C4EE009C7640 /* Motherboard.swift in Sources */,
+				2B7DA8802779341D00F4FA09 /* ComputersEditView.swift in Sources */,
 				2B5EB213277D1A3B00DFE426 /* DriveItemControl.swift in Sources */,
+				2B175BF22845C54C009C7640 /* OperatingSystem.swift in Sources */,
 				2B5D1354277D6F0D00DBC03E /* Helpers.swift in Sources */,
-				2B7DA882277934F200F4FA09 /* RetroCollectionItemRow.swift in Sources */,
+				2B7DA882277934F200F4FA09 /* ComputersItemRow.swift in Sources */,
 				2B7DA884277A608B00F4FA09 /* Drives.swift in Sources */,
-				2B2FB0BB277C229600D1EA51 /* RetroCollectionItemViewModel.swift in Sources */,
+				2B175C1028471E69009C7640 /* GamingItemRow.swift in Sources */,
+				2B175BF82845CC03009C7640 /* ComponentCollectionItem.swift in Sources */,
+				2B175BFE2845CCB8009C7640 /* ComponentsDetailView.swift in Sources */,
+				2B2FB0BB277C229600D1EA51 /* ComputerCollectionItemViewModel.swift in Sources */,
+				2B175C042845CD1D009C7640 /* ComponentsCollectionView.swift in Sources */,
+				2B175C12284728AA009C7640 /* ComponentCollectionItemViewModel.swift in Sources */,
 				2B063CEF277E89E2005B0A1B /* OperatingSystemItemControl.swift in Sources */,
 				2B7DA8692779108100F4FA09 /* RetroCollectionApp.swift in Sources */,
 				2B7DA87C27791E4E00F4FA09 /* RetroCollectionTestData.swift in Sources */,
 				2B4A1B27277E1A770098E1EA /* ConnectionItemControl.swift in Sources */,
 				2B5D1356277D708A00DBC03E /* EditorConfig.swift in Sources */,
+				2B175BF42845C567009C7640 /* Maintenance.swift in Sources */,
+				2B175C022845CCED009C7640 /* ComponentsEditView.swift in Sources */,
+				2B175BF02845C52E009C7640 /* Screen.swift in Sources */,
 				2B7DA886277A630800F4FA09 /* ExpansionCards.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,10 +602,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RetroCollection/RetroCollection.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RetroCollection/Preview Content\"";
 				DEVELOPMENT_TEAM = F8Z3SSRKW7;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RetroCollection/Info.plist;
@@ -429,6 +625,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jrendean.RetroCollection;
 				PRODUCT_NAME = RetroCollection;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -440,10 +637,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RetroCollection/RetroCollection.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RetroCollection/Preview Content\"";
 				DEVELOPMENT_TEAM = F8Z3SSRKW7;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RetroCollection/Info.plist;
@@ -461,6 +660,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jrendean.RetroCollection;
 				PRODUCT_NAME = RetroCollection;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

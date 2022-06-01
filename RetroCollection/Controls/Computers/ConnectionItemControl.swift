@@ -111,12 +111,11 @@ struct ConnectionItemControl_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             StatefulPreviewWrapper(
-                testData: EditorConfig<Connection>(data: RetroCollectionItem.testData[1].connections[1], mode: .view))
+                testData: EditorConfig<Connection>(data: ComputerCollectionItem.testData[1].connections[1], mode: .view))
 
             StatefulPreviewWrapper(
-                testData: EditorConfig<Connection>(data: RetroCollectionItem.testData[1].connections[1], mode: .edit))
+                testData: EditorConfig<Connection>(data: ComputerCollectionItem.testData[1].connections[1], mode: .edit))
         }
     }
 }
 #endif
-

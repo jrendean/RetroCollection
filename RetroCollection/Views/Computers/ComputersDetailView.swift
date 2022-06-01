@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  ComputersDetailView.swift
 //  RetroCatalog
 //
 //  Created by JR Endean on 12/26/21.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct DetailView: View {
+struct ComputersDetailView: View {
     
-    @Binding var retroCollectionItems: [RetroCollectionItem]
-    @Binding var retroCollectionItem: RetroCollectionItem
+    @Binding var computerCollectionItems: [ComputerCollectionItem]
+    @Binding var computerCollectionItem: ComputerCollectionItem
     
     @State private var showEditView: Bool = false
-    @State private var retroCollectionItemForEditing = RetroCollectionItem()
+    @State private var computerCollectionItemForEditing = ComputerCollectionItem()
         
     @State private var driveEditorConfig: EditorConfig = EditorConfig<Drive>()
     @State private var expansionEditorConfig: EditorConfig = EditorConfig<ExpansionCard>()
@@ -28,31 +28,31 @@ struct DetailView: View {
                 HStack {
                     Text("Type:")
                     Spacer()
-                    Text(retroCollectionItem.type)
+                    Text(computerCollectionItem.type)
                 }
                 
                 HStack {
                     Text("Manufacturer:")
                     Spacer()
-                    Text(retroCollectionItem.manufacturer)
+                    Text(computerCollectionItem.manufacturer)
                 }
                 
                 HStack {
                     Text("Name:")
                     Spacer()
-                    Text(retroCollectionItem.name)
+                    Text(computerCollectionItem.name)
                 }
                 
                 HStack {
                     Text("Processor")
                     Spacer()
-                    Text(retroCollectionItem.processorInfo)
+                    Text(computerCollectionItem.processorInfo)
                 }
                 
                 HStack {
                     Text("Total RAM")
                     Spacer()
-                    Text(retroCollectionItem.totalRam)
+                    Text(computerCollectionItem.totalRam)
                 }
           
                 DisclosureGroup("Details") {
@@ -60,55 +60,83 @@ struct DetailView: View {
                     HStack {
                         Text("Model:")
                         Spacer()
-                        Text(retroCollectionItem.model)
+                        Text(computerCollectionItem.model)
                     }
                     
                     HStack {
                         Text("Model Number:")
                         Spacer()
-                        Text(retroCollectionItem.modelNumber)
+                        Text(computerCollectionItem.modelNumber)
                     }
                     
                     HStack {
                         Text("Serial Number:")
                         Spacer()
-                        Text(retroCollectionItem.serialNumber)
+                        Text(computerCollectionItem.serialNumber)
                     }
                     
                     HStack {
                         Text("CodeName:")
                         Spacer()
-                        Text(retroCollectionItem.codeName)
+                        Text(computerCollectionItem.codeName)
                     }
                     
                     HStack {
                         Text("Also Known As:")
                         Spacer()
-                        Text(retroCollectionItem.alsoKnownAs)
+                        Text(computerCollectionItem.alsoKnownAs)
                     }
                     
                     HStack {
                         Text("Released:")
                         Spacer()
-                        Text(retroCollectionItem.releasedDateFormatted)
+                        Text(computerCollectionItem.releasedDateFormatted)
                     }
                     
                     HStack {
                         Text("Discontinued:")
                         Spacer()
-                        Text(retroCollectionItem.discontinuedDateFormatted)
+                        Text(computerCollectionItem.discontinuedDateFormatted)
+                    }
+                }
+            }
+            
+            
+            Section("Photos") {
+                ScrollView(.horizontal) {
+                    HStack {
+                        if computerCollectionItem.photos.isEmpty {
+                            Text("None")
+                        }
+                        else {
+                            ForEach($computerCollectionItem.photos) { photo in
+                                //let image = DataManager.loadImage(filename: photo.id.uuidString)
+                                let imageData = photo.image.imageData
+                            
+                                Image.init(uiImage: UIImage(data: imageData.wrappedValue)!)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 360)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                                    .shadow(radius: 5)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(Color.white, lineWidth: 5)
+                                    )
+                            }
+                        }
                     }
                 }
             }
             
             
             Section("Drives") {
-                ForEach ($retroCollectionItem.drives) { $drive in
+                ForEach ($computerCollectionItem.drives) { $drive in
                     HStack {
                         Text(drive.type.rawValue)
                         Spacer()
-                        Image(systemName: "info.circle")
-                            .symbolRenderingMode(.multicolor)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.accentColor)
                             .onTapGesture {
                                 driveEditorConfig.present(mode: .view, data: drive)
                             }
@@ -122,13 +150,14 @@ struct DetailView: View {
                 )
             }
             
+            
             Section("Expansion") {
-                ForEach ($retroCollectionItem.expansions) { $expansion in
+                ForEach ($computerCollectionItem.expansions) { $expansion in
                     HStack {
                         Text(expansion.type.rawValue)
                         Spacer()
-                        Image(systemName: "info.circle")
-                            .symbolRenderingMode(.multicolor)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.accentColor)
                             .onTapGesture {
                                 expansionEditorConfig.present(mode: .view, data: expansion)
                             }
@@ -143,12 +172,12 @@ struct DetailView: View {
             }
             
             Section("Connections") {
-                ForEach ($retroCollectionItem.connections) { $connection in
+                ForEach ($computerCollectionItem.connections) { $connection in
                     HStack {
                         Text(connection.type.rawValue)
                         Spacer()
-                        Image(systemName: "info.circle")
-                            .symbolRenderingMode(.multicolor)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.accentColor)
                             .onTapGesture {
                                 connectionEditorConfig.present(mode: .view, data: connection)
                             }
@@ -164,14 +193,14 @@ struct DetailView: View {
             
             
             Section("Operating System(s)") {
-                ForEach ($retroCollectionItem.operatingSystems) { $operatingSystem in
+                ForEach ($computerCollectionItem.operatingSystems) { $operatingSystem in
                     HStack {
                         Text("\(operatingSystem.name) \(operatingSystem.version)")
                         Spacer()
                         if (operatingSystem.links.count > 0) {
                             Link(destination: URL(string: operatingSystem.links[0])!) {
-                                Image(systemName: "info.circle")
-                                    .symbolRenderingMode(.multicolor)
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.accentColor)
                             }
                         }
                     }
@@ -180,7 +209,7 @@ struct DetailView: View {
             
             
             Section("Links") {                
-                ForEach($retroCollectionItem.links, id: \.self) { $link in
+                ForEach($computerCollectionItem.links, id: \.self) { $link in
                     HStack {
                         Text(.init("[\(link)](\(link))"))
                             .lineLimit(1)
@@ -191,26 +220,27 @@ struct DetailView: View {
             }
             
             
+            
             Section("Maintenance") {
                 HStack {
                     Text("Recapped:")
                     Spacer()
-                    Text(retroCollectionItem.maintenance.recapped ? "Yes" : "No")
+                    Text(computerCollectionItem.maintenance.recapped ? "Yes" : "No")
                 }
                 HStack {
                     Text("Battery State:")
                     Spacer()
-                    Text(retroCollectionItem.maintenance.batteryState)
+                    Text(computerCollectionItem.maintenance.batteryState)
                 }
                 HStack {
                     Text("Known Issues:")
                     Spacer()
-                    Text(retroCollectionItem.maintenance.knownIssues)
+                    Text(computerCollectionItem.maintenance.knownIssues)
                 }
                 HStack() {
                     Text("Note:")
                     Spacer()
-                    Text(retroCollectionItem.maintenance.notes)
+                    Text(computerCollectionItem.maintenance.notes)
                 }
             }
             
@@ -220,7 +250,7 @@ struct DetailView: View {
                 Button(
                     action: {
                         showEditView = true
-                        retroCollectionItemForEditing = self.retroCollectionItem
+                        computerCollectionItemForEditing = self.computerCollectionItem
                     },
                     label: { Text("Edit") })
             })
@@ -229,11 +259,34 @@ struct DetailView: View {
             isPresented: $showEditView,
             content: {
                 NavigationView {
-                    EditView(retroCollectionItem: $retroCollectionItemForEditing)
+                    ComputersEditView(computerCollectionItem: $computerCollectionItemForEditing)
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction, content: {
                                 Button(
-                                    action: { showEditView = false },
+                                    action: {
+                                        showEditView = false
+                                        
+                                        // delete the copied photos that are not saved
+                                        var toRemove: [Int] = []
+                                        for i in computerCollectionItemForEditing.photos.indices {
+                                            if !computerCollectionItemForEditing.photos[i].saved {
+                                                toRemove.append(i)
+                                            }
+                                        }
+                                        for i in toRemove {
+                                            //DataManager.deleteImage(filename: retroCollectionItemForEditing.photos[i].id.uuidString)
+                                            computerCollectionItemForEditing.photos.remove(at: i)
+                                        }
+                                        
+                                        self.computerCollectionItem = computerCollectionItemForEditing
+                                        
+                                        // HACK with passing in the binding for all the whole collection and just this item, fix me
+                                        // perhaps do no use a navigationlink in the main view and do a sheet or ontap thing that has
+                                        // ondismiss or use editorconfig and pass that in
+                                        // or anoter datamanager.save() that takes the single item, finds it, updates it
+                                        // then calls the regular save
+                                        DataManager.saveComputersCollection(computerCollectionItems: self.computerCollectionItems)
+                                    },
                                     label: { Text("Cancel") }
                                 )
                             })
@@ -243,22 +296,38 @@ struct DetailView: View {
                                     action: {
                                         showEditView = false
                                         
-                                        self.retroCollectionItem = retroCollectionItemForEditing
+                                        
+                                        // delete the photos that were marked to be deleted
+                                        var toRemove: [Int] = []
+                                        for i in computerCollectionItemForEditing.photos.indices {
+                                            if computerCollectionItemForEditing.photos[i].shouldDelete {
+                                                toRemove.append(i)
+                                            }
+                                        }
+                                        for i in toRemove {
+                                            //DataManager.deleteImage(filename: retroCollectionItemForEditing.photos[i].id.uuidString)
+                                            computerCollectionItemForEditing.photos.remove(at: i)
+                                        }
+                                        
+                                        
+                                        
+                                        self.computerCollectionItem = computerCollectionItemForEditing
                                         
                                         // HACK with passing in the binding for all the whole collection and just this item, fix me
                                         // perhaps do no use a navigationlink in the main view and do a sheet or ontap thing that has
                                         // ondismiss or use editorconfig and pass that in
                                         // or anoter datamanager.save() that takes the single item, finds it, updates it
                                         // then calls the regular save
-                                        DataManager.save(retroCollectionItems: self.retroCollectionItems)
+                                        DataManager.saveComputersCollection(computerCollectionItems: self.computerCollectionItems)
                                     },
                                     label: { Text("Save") }
                                 )
+                                .disabled(!computerCollectionItemForEditing.validView)
                             })
                         }                        
                 }
             })
-        .navigationTitle("\(retroCollectionItem.manufacturer) \(retroCollectionItem.name)")
+        .navigationTitle("\(computerCollectionItem.manufacturer) \(computerCollectionItem.name)")
         
     }
 }
@@ -268,11 +337,11 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     struct StatefulPreviewWrapper: View {
         
-        @State private var testData1 = RetroCollectionItem.testData
-        @State private var testData2 = RetroCollectionItem.testData[0]
+        @State private var items = ComputerCollectionItem.testData
+        @State private var item = ComputerCollectionItem.testData[0]
         
         var body: some View {
-            DetailView(retroCollectionItems: $testData1, retroCollectionItem: $testData2)
+            ComputersDetailView(computerCollectionItems: $items, computerCollectionItem: $item)
         }
     }
     
